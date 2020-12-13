@@ -10,4 +10,5 @@ First, type once:
 - `brew tap Yann-R/canettes`
 
 and then, use as you want:
-- `brew install <cask-or-formula-name>`
+- `brew install <formula-name>`
+- `brew install --cask <cask-name>`
