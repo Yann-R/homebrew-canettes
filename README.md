@@ -1,3 +1,4 @@
+![Beer Faces](beer-faces.jpg "(c) Le Gallodrome")
 # homebrew-canettes Tap
 
 [Formulae](https://github.com/Yann-R/homebrew-canettes/tree/main/Formula) for [Homebrew](https://brew.sh) on macOS, 
