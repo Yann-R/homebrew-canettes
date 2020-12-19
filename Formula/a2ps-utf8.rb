@@ -10,4 +10,10 @@ class A2psUtf8 < Formula
   def install
     bin.install "a2ps-utf8"
   end
+
+  test do
+    (testpath/"test.txt").write("Hello World!\n")
+    system bin/"a2ps-utf8", "test.txt", "-o", "test.ps"
+    assert File.read("test.ps").start_with?("%!PS-Adobe")
+  end
 end
