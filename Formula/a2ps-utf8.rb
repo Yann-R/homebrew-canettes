@@ -1,5 +1,5 @@
 class A2psUtf8 < Formula
-  desc "Wrapper around a2ps to accept input files in UTF8 (using iconv to convert)"
+  desc "Wrapper around a2ps to accept input files in UTF-8 (using iconv to convert)"
   homepage "https://matthieu-moy.fr/utils/"
   url "https://matthieu-moy.fr/utils/a2ps-utf8"
   version "2005.1.21"
