@@ -4,7 +4,7 @@ cask "dnd-me" do
 
   url "https://dl.devmate.com/com.runtimesharks.dndme/DNDMe.dmg",
       verified: "https://dl.devmate.com/"
-  appcast 'https://runtimesharks.com/projects/dnd-me'
+  appcast "https://runtimesharks.com/projects/dnd-me"
   name "DND Me"
   desc "Activate Do Not Disturb for a few hours"
   homepage "https://runtimesharks.com/projects/dnd-me"
