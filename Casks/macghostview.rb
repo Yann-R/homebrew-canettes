@@ -26,7 +26,7 @@ cask "macghostview" do
   ]
 
   caveats <<~EOS
-    Three Drop scripts are supplied for launching the terminal commands (gv, xdvi and xdvi)
+    Three Drop scripts are supplied for launching the terminal commands (gv, xdvi and xpdf)
     as applications from the Finder.
   EOS
 end
