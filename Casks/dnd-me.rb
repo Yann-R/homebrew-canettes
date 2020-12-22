@@ -1,11 +1,10 @@
 cask "dnd-me" do
-  version "1.1.2"
-  sha256 :no_check
-  # sha256 "d57e89a8c6c569fd9fc3daa2335011253694b7b5b6521b33e744360a42b4009b"
+  version "1.1.2,833:1585769858"
+  sha256 "219eb70be0091ec70b13480547cdd0843cd33c68ae94d8b860248a0fb53d90bc"
 
-  url "https://dl.devmate.com/com.runtimesharks.dndme/DNDMe.dmg",
+  url "https://dl.devmate.com/com.runtimesharks.dndme/#{version.after_comma.before_colon}/#{version.after_colon}/DNDMe-#{version.after_comma.before_colon}.zip",
       verified: "https://dl.devmate.com/"
-  # appcast "https://runtimesharks.com/projects/dnd-me"
+  appcast "https://updates.devmate.com/com.runtimesharks.dndme.xml"
   name "DND Me"
   desc "Activate Do Not Disturb for a few hours"
   homepage "https://runtimesharks.com/projects/dnd-me"
