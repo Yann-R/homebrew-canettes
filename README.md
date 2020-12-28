@@ -9,6 +9,5 @@ and [Casks](https://github.com/Yann-R/homebrew-canettes/tree/main/Casks) for [Ho
 First, type once:
 - `brew tap Yann-R/canettes`
 
-and then, install as you want:
-- `brew install <formula-name>`
-- `brew install --cask <cask-name>`
+and then, install what you need:
+- `brew install <cask-or-formula-name>`
