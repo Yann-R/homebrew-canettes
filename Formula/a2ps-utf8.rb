@@ -6,7 +6,7 @@ class A2psUtf8 < Formula
   sha256 "84e43a23b2abe23cf4c46cf393e0d9afa1a36dbb7eb827cbde16ab9524fb6f41"
 
   depends_on "a2ps"
-  uses_from_macos "iconv"
+  uses_from_macos "libiconv"
 
   def install
     bin.install "a2ps-utf8"
