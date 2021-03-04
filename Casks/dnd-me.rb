@@ -27,7 +27,7 @@ cask "dnd-me" do
   ]
 
   caveats <<~EOS
-	• Due to system limitations on Big Sur (v2.0.0+), if a schedule is active, during those hours DND Me can not perform any actions, but it will update according to external changes.
-	• Due to system limitations on Sierra–Catalina (v1.1.3), DND Me does not work if Do Not Disturb is scheduled in System Preferences -> Notifications.
+    • Due to system limitations on Big Sur (v2.0.0+), if a schedule is active, during those hours DND Me can not perform any actions, but it will update according to external changes.
+    • Due to system limitations on Sierra–Catalina (v1.1.3), DND Me does not work if Do Not Disturb is scheduled in System Preferences -> Notifications.
   EOS
 end
