@@ -1,6 +1,6 @@
 cask "macghostview" do
   version "6.1"
-  sha256 "b20270fffea09bb4ca6c19fa41a18e8ef0071402a4b8ba17927f3da3c6f848d3"
+  sha256 "48d318a53d5876bf359da281ab3966258fe2eb43f3b1c7ccb90d88b63d9be2be"
 
   url "https://www.math.tamu.edu/~tkiffe/tex/programs/MacGhostView#{version.no_dots}.dmg.zip"
   appcast "https://www.math.tamu.edu/~tkiffe/macghostview.html"
@@ -13,8 +13,8 @@ cask "macghostview" do
   app "gv_xdvi-motif_xpdf/Dropscript-xdvim.app"
   app "gv_xdvi-motif_xpdf/Dropscript-xpdf.app"
   binary "gv_xdvi-motif_xpdf/gv"
-  binary "gv_xdvi-motif_xpdf/xdvim"
-  binary "gv_xdvi-motif_xpdf/xdvi-motif"
+  binary "gv_xdvi-motif_xpdf/xdvim for MacTeX 2020/xdvim"
+  binary "gv_xdvi-motif_xpdf/xdvim for MacTeX 2020/xdvi-motif"
   binary "gv_xdvi-motif_xpdf/xpdf"
   binary "gv_xdvi-motif_xpdf/xpdf-bin"
   manpage "gv_xdvi-motif_xpdf/gv.1"
