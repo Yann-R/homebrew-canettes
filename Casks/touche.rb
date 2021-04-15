@@ -7,6 +7,12 @@ cask "touche" do
   desc "Touch Bar for everyone (Simulate, show and hide, take screen captures)"
   homepage "https://redsweater.com/touche/"
 
+  livecheck do
+    url :homepage
+    strategy :page_match
+    regex(%r{href=.*?/Touche(\d+(?:\.\d+)*)\.zip}i)
+  end
+
   depends_on macos: ">= :sierra"
 
   app "Touché.app"
