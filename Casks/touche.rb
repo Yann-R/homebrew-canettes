@@ -2,7 +2,7 @@ cask "touche" do
   version "1.1.4"
   sha256 "275a2885214befd088fe20707f306d3ad1743cf8181334ed4ef976391fff6c7f"
 
-  url "https://red-sweater.com/touche/Touche#{version}.zip"
+  url "https://redsweater.com/touche/Touche#{version}.zip"
   name "Touché"
   desc "Touch Bar for everyone (Simulate, show and hide, take screen captures)"
   homepage "https://redsweater.com/touche/"
