@@ -1,8 +1,8 @@
 class Xfig < Formula
   desc "Interactive drawing tool for X"
   homepage "https://mcj.sourceforge.io"
-  url "https://downloads.sourceforge.net/project/mcj/xfig-3.2.8.tar.xz"
-  sha256 "dc2f4fb8d3fc119da5c9d4db89cd1607c49fad74436965253612d80e2eaeeab3"
+  url "https://downloads.sourceforge.net/project/mcj/xfig-3.2.8a.tar.xz"
+  sha256 "ba43c0ea85b230d3efa5a951a3239e206d0b033d044c590a56208f875f888578"
 
   livecheck do
     url :stable
@@ -18,7 +18,6 @@ class Xfig < Formula
 
   def install
     args = %W[
-      # LDFLAGS="-ljpeg"
       --prefix=#{prefix}
       --disable-dependency-tracking
       --disable-silent-rules
@@ -26,7 +25,7 @@ class Xfig < Formula
 
     system "./configure", *args
     # Patches one makefile using implicitely libjpeg on macOS
-    inreplace "src/Makefile", "-lXpm", "-lXpm -ljpeg" 
+    inreplace "src/Makefile", "-lXpm", "-lXpm -ljpeg"
     system "make", "install"
   end
 
