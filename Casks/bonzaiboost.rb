@@ -7,6 +7,12 @@ cask "bonzaiboost" do
   desc "General purpose machine-learning program based on decision tree for building a classifier from text and/or attribute-value data"
   homepage "http://bonzaiboost.gforge.inria.fr/"
 
+  livecheck do
+    url :homepage
+    strategy :page_match
+    regex(%r{bonzaiboost v(\d+(?:\.\d+)*)}i)
+  end
+
   depends_on formula: "gcc"
   depends_on formula: "libomp"
 
