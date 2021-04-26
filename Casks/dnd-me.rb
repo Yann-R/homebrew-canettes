@@ -1,18 +1,26 @@
 cask "dnd-me" do
   if MacOS.version <= :catalina
-    version "1.1.2,837:1611389306"
-    sha256 "09681028eb5f6651ddee6113733cc8a7813212246ecca236b698dda253a173d4"
+    version "1.1.3,837:1611389306"
+    sha256 "15edcec06d4f0d754c77e1e3aa0773410ecccc0766df3448ad2d638b5f626598"
   else
-    version "2.0.0,1372:1614616878"
-    sha256 "6132b35ed84ceae921c1e9be077fa7e6c3822ff915469a219358d8b6a7e8699c"
+    version "2.2.2,1684:1619161284"
+    sha256 "14a0551eb86435356716600c747076148bbdc00014dc18fa5b9a4fea2f55cfcc"
   end
 
-  url "https://dl.devmate.com/com.runtimesharks.dndme/#{version.after_comma.before_colon}/#{version.after_colon}/DNDMe-#{version.after_comma.before_colon}.zip",
-      verified: "https://dl.devmate.com/"
-  appcast "https://updates.devmate.com/com.runtimesharks.dndme.xml"
+  #appcast "https://updates.devmate.com/com.runtimesharks.dndme.xml" #Useless with livecheck
   name "DND Me"
   desc "Activate Do Not Disturb for a few hours"
   homepage "https://runtimesharks.com/projects/dnd-me"
+
+   url "https://dl.devmate.com/com.runtimesharks.dndme/#{version.after_comma.before_colon}/#{version.after_colon}/DNDMe-#{version.after_comma.before_colon}.dmg",
+      verified: "dl.devmate.com/" #Exists also as .zip (zipped dmg)
+      
+    livecheck do
+      url "https://updates.devmate.com/com.runtimesharks.dndme.xml"
+      strategy :sparkle do |item|
+        "#{item.short_version},#{item.version}:#{item.url[%r{/(\d+)/DNDMe-\d+\.[dmg|zip]}i, 1]}"
+      end
+    end
 
   depends_on macos: ">= :sierra"
 
