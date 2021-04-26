@@ -3,10 +3,15 @@ cask "macghostview" do
   sha256 "48d318a53d5876bf359da281ab3966258fe2eb43f3b1c7ccb90d88b63d9be2be"
 
   url "https://www.math.tamu.edu/~tkiffe/tex/programs/MacGhostView#{version.no_dots}.dmg.zip"
-  appcast "https://www.math.tamu.edu/~tkiffe/macghostview.html"
   name "MacGhostView"
   desc "Preview and conversion of Postscript files (with gv, xdvi-motif and xpdf)"
   homepage "https://www.math.tamu.edu/~tkiffe/macghostview.html"
+
+  livecheck do
+    url :homepage
+    strategy :page_match
+    regex(%r{MacGhostView (\d+(?:\.\d+)*)}i)
+  end
 
   app "MacGhostView.app"
   app "gv_xdvi-motif_xpdf/Dropscript-gv.app"
