@@ -1,6 +1,9 @@
 class Xv < Formula
   desc "Interactive image manipulation program for the X Window System"
   homepage "http://www.trilon.com/xv/"
+  # David Griffith's repository is one of the most interesting sources:
+  # - integrates Greg Roelofs's jumbo patch http://www.gregroelofs.com/greg_xv.html
+  # - and adds many more https://gitlab.com/DavidGriffith/xv/-/issues/4
   url "https://gitlab.com/DavidGriffith/xv.git",
       revision: "c704ea045d1243a19d97ffd0eb74997c413b89d6",
       shallow:  false
