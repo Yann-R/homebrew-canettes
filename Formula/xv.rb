@@ -22,13 +22,14 @@ class Xv < Formula
   # depends on "zlib", uses macOS version
 
   def install
-    # Adapts the source files for brewing
+    # Adapt the source files for macOS
     # inreplace "vdcomp.c", "__DARWIN__", "__APPLE__"
     inreplace "xv.h", "extern char *sys_errlist[];", ""
     inreplace "xv.h", "#include <stdio.h>", "#include <stdio.h>\n#include <limits.h>"
     inreplace "xvjp2k.c", "jas_memdump(FILE *fp,void *data,size_t len)",
               "jas_memdump(FILE *fp,const void *data,size_t len)"
 
+    # Adapt the source files for brewing
     inreplace "Makefile", "/usr/X11R6/lib", "#{HOMEBREW_PREFIX}/lib"
     # To add X11 include as last, avoids imposing its embedded png includes:
     inreplace "Makefile", '-DXVEXECPATH=\"$(LIBDIR)\"', 
