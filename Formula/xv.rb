@@ -24,6 +24,8 @@ class Xv < Formula
   def install
     # Adapt the source files for macOS
     # inreplace "vdcomp.c", "__DARWIN__", "__APPLE__"
+    inreplace "xv.h", "#define REVDATE   \"version 3.10a-jumboFix+Enh of 20081216 (interim!)\"",
+              "#define REVDATE   \"version #{version}-jumboFix+Enh of 20081216 (David Griffith\'s release)\""
     inreplace "xv.h", "extern char *sys_errlist[];", ""
     inreplace "xv.h", "#include <stdio.h>", "#include <stdio.h>\n#include <limits.h>"
     inreplace "xvjp2k.c", "jas_memdump(FILE *fp,void *data,size_t len)",
