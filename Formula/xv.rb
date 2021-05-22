@@ -37,7 +37,7 @@ class Xv < Formula
     inreplace "Makefile", "TIFFDIR = /usr", "TIFFDIR = #{HOMEBREW_PREFIX}"
     inreplace "Makefile", "JPEGDIR = /usr", "JPEGDIR = #{HOMEBREW_PREFIX}"
     inreplace "Makefile", "PNGDIR = /usr", "PNGDIR = #{HOMEBREW_PREFIX}"
-    #inreplace "Makefile", "ZLIBDIR = /usr", "ZLIBDIR = #{HOMEBREW_PREFIX}"
+    #inreplace "Makefile", "ZLIBDIR = /usr", "ZLIBDIR = #{HOMEBREW_PREFIX}" # Uses macOS version
     # To enable Jpeg 2000
     inreplace "Makefile", "#JP2K    = -DDOJP2K", "JP2K    = -DDOJP2K"
     inreplace "Makefile", "#JP2KDIR = /usr/local/lib", "JP2KDIR = #{HOMEBREW_PREFIX}"
