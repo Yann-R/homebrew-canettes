@@ -31,7 +31,7 @@ class Xv < Formula
 
     # Adapt the source files for brewing
     inreplace "Makefile", "/usr/X11R6/lib", "#{HOMEBREW_PREFIX}/lib"
-    # To add X11 include as last, avoids imposing its embedded png includes:
+    # To add X11 include as last, avoids imposing its embedded png includes
     inreplace "Makefile", '-DXVEXECPATH=\"$(LIBDIR)\"', 
               '-DXVEXECPATH=\"$(LIBDIR)\"' + " -I#{HOMEBREW_PREFIX}/include"
     inreplace "Makefile", "TIFFDIR = /usr", "TIFFDIR = #{HOMEBREW_PREFIX}"
