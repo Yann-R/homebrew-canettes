@@ -37,7 +37,7 @@ class Xv < Formula
 
     # Adapt the source files for brewing
     inreplace "xv.h", "#define REVDATE   \"version 3.10a-jumboFix+Enh of 20081216 (interim!)\"",
-              "#define REVDATE   \"version #{version}-jumboFix+Enh of 20081216 (David Griffith\'s release)\""
+              "#define REVDATE   \"version 3.10a-#{version}-jumboFix+Enh of 20081216 (David Griffith\'s release)\""
     inreplace "Makefile", "/usr/X11R6/lib", "#{HOMEBREW_PREFIX}/lib"
     # To add X11 include as last, avoids imposing its embedded png includes
     inreplace "Makefile", '-DXVEXECPATH=\"$(LIBDIR)\"', 
