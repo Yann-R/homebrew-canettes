@@ -2,14 +2,20 @@ class Xv < Formula
   desc "Interactive image manipulation program for the X Window System"
   homepage "http://www.trilon.com/xv/"
   # David Griffith's repository is one of the most interesting sources for John Bradley's xv:
-  # - integrates Greg Roelofs's jumbo patch http://www.gregroelofs.com/greg_xv.html
-  # - and adds many more https://gitlab.com/DavidGriffith/xv/-/issues/4
+  # - integrates Greg Roelofs's jumbo patch => http://www.gregroelofs.com/greg_xv.html
+  # - and adds many more => https://gitlab.com/DavidGriffith/xv/-/issues/4
   url "https://gitlab.com/DavidGriffith/xv.git",
       revision: "c704ea045d1243a19d97ffd0eb74997c413b89d6",
       shallow:  false
-  version "3.10a-20190926"
+  version "2019-09-25T22:41:08Z" # date of the last patch on original version 3.10a
   # license "shareware for personnal use only"
   head "https://gitlab.com/DavidGriffith/xv.git"
+
+  livecheck do
+    url "https://gitlab.com/DavidGriffith/xv.atom"
+    regex(%r{<updated>(.+)</updated>}i)
+    # e.g. <updated>2019-09-25T22:41:08Z</updated>
+  end
 
   depends_on "jasper"
   depends_on "jpeg"
@@ -39,7 +45,7 @@ class Xv < Formula
     inreplace "Makefile", "TIFFDIR = /usr", "TIFFDIR = #{HOMEBREW_PREFIX}"
     inreplace "Makefile", "JPEGDIR = /usr", "JPEGDIR = #{HOMEBREW_PREFIX}"
     inreplace "Makefile", "PNGDIR = /usr", "PNGDIR = #{HOMEBREW_PREFIX}"
-    #inreplace "Makefile", "ZLIBDIR = /usr", "ZLIBDIR = #{HOMEBREW_PREFIX}" # Uses macOS version
+    # inreplace "Makefile", "ZLIBDIR = /usr", "ZLIBDIR = #{HOMEBREW_PREFIX}" # Uses macOS version
     # To enable Jpeg 2000
     inreplace "Makefile", "#JP2K    = -DDOJP2K", "JP2K    = -DDOJP2K"
     inreplace "Makefile", "#JP2KDIR = /usr/local/lib", "JP2KDIR = #{HOMEBREW_PREFIX}"
