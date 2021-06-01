@@ -7,14 +7,17 @@ class Xv < Formula
   url "https://gitlab.com/DavidGriffith/xv.git",
       revision: "c704ea045d1243a19d97ffd0eb74997c413b89d6",
       shallow:  false
-  version "2019-09-25T22:41:08Z" # date of the last patch on original version 3.10a
+  version "3.10a-2019-09-25T22:41:08Z" # date of the last patch on original version 3.10a
   # license "shareware for personnal use only"
   head "https://gitlab.com/DavidGriffith/xv.git"
 
   livecheck do
     url "https://gitlab.com/DavidGriffith/xv.atom"
-    regex(%r{<updated>(.+)</updated>}i)
-    # e.g. <updated>2019-09-25T22:41:08Z</updated>
+    strategy :page_match do |page|
+      # e.g. <updated>2019-09-25T22:41:08Z</updated>
+      match = page.match(%r{<updated>(?<date>.+)</updated>}i)
+      "3.10a-#{match[:date]}"
+    end
   end
 
   depends_on "jasper"
@@ -37,10 +40,10 @@ class Xv < Formula
 
     # Adapt the source files for brewing
     inreplace "xv.h", "#define REVDATE   \"version 3.10a-jumboFix+Enh of 20081216 (interim!)\"",
-              "#define REVDATE   \"version 3.10a-#{version}-jumboFix+Enh of 20081216 (David Griffith\'s release)\""
+              "#define REVDATE   \"version #{version}-jumboFix+Enh of 20081216 (David Griffith\'s release)\""
     inreplace "Makefile", "/usr/X11R6/lib", "#{HOMEBREW_PREFIX}/lib"
     # To add X11 include as last, avoids imposing its embedded png includes
-    inreplace "Makefile", '-DXVEXECPATH=\"$(LIBDIR)\"', 
+    inreplace "Makefile", '-DXVEXECPATH=\"$(LIBDIR)\"',
               '-DXVEXECPATH=\"$(LIBDIR)\"' + " -I#{HOMEBREW_PREFIX}/include"
     inreplace "Makefile", "TIFFDIR = /usr", "TIFFDIR = #{HOMEBREW_PREFIX}"
     inreplace "Makefile", "JPEGDIR = /usr", "JPEGDIR = #{HOMEBREW_PREFIX}"
