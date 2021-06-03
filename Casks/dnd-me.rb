@@ -7,19 +7,18 @@ cask "dnd-me" do
     sha256 "14a0551eb86435356716600c747076148bbdc00014dc18fa5b9a4fea2f55cfcc"
   end
 
+  url "https://dl.devmate.com/com.runtimesharks.dndme/#{version.after_comma.before_colon}/#{version.after_colon}/DNDMe-#{version.after_comma.before_colon}.dmg",
+      verified: "dl.devmate.com/" # Exists also as .zip (zipped dmg)
   name "DND Me"
   desc "Activate Do Not Disturb for a few hours"
   homepage "https://runtimesharks.com/projects/dnd-me"
 
-   url "https://dl.devmate.com/com.runtimesharks.dndme/#{version.after_comma.before_colon}/#{version.after_colon}/DNDMe-#{version.after_comma.before_colon}.dmg",
-      verified: "dl.devmate.com/" # Exists also as .zip (zipped dmg)
-      
-    livecheck do
-      url "https://updates.devmate.com/com.runtimesharks.dndme.xml"
-      strategy :sparkle do |item|
-        "#{item.short_version},#{item.version}:#{item.url[%r{/(\d+)/DNDMe-\d+\.[dmg|zip]}i, 1]}"
-      end
+  livecheck do
+    url "https://updates.devmate.com/com.runtimesharks.dndme.xml"
+    strategy :sparkle do |item|
+      "#{item.short_version},#{item.version}:#{item.url[%r{/(\d+)/DNDMe-\d+\.[dmg|zip]}i, 1]}"
     end
+  end
 
   depends_on macos: ">= :sierra"
 
