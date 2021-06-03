@@ -13,9 +13,10 @@ class Xv < Formula
 
   livecheck do
     url "https://gitlab.com/DavidGriffith/xv.atom"
-    strategy :page_match do |page|
-      # e.g. <updated>2019-09-25T22:41:08Z</updated>
-      match = page.match(%r{<updated>(?<date>.+)</updated>}i)
+    regex(%r{<updated>(?<date>.+)</updated>}i)
+    # e.g. <updated>2019-09-25T22:41:08Z</updated>
+    strategy :page_match do |page, regex|
+      match = page.match(regex)
       "3.10a-#{match[:date]}"
     end
   end
