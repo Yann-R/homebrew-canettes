@@ -7,7 +7,7 @@ class EclipseClp < Formula
 
   livecheck do
     url "http://eclipseclp.org/Distribution/CurrentRelease/"
-    regex(%r{(\d+\.\d+_\d+).*MacOS}i)
+    regex(/(\d+\.\d+_\d+).*MacOS/i)
     # e.g. 6.1_164 x86_64_macosx Intel-64bit-MacOS
     # and put '-' instead of '_' (not accepted by brew in versions)
     strategy :page_match do |page, regex|
