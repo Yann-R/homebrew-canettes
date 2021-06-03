@@ -10,7 +10,7 @@ cask "macghostview" do
   livecheck do
     url :homepage
     strategy :page_match
-    regex(%r{MacGhostView (\d+(?:\.\d+)*)}i)
+    regex(/MacGhostView (\d+(?:\.\d+)*)/i)
   end
 
   app "MacGhostView.app"
