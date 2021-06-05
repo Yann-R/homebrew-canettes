@@ -11,8 +11,14 @@ cask "dnd-me1" do
   livecheck do
     url "https://updates.devmate.com/com.runtimesharks.dndme.xml"
     strategy :page_match do |page| # Avoids strategy :sparkle to target version 1.x in releases
-      # e.g. url="https://dl.devmate.com/com.runtimesharks.dndme/837/1611389306/DNDMe-837.zip" length="10445785" type="application/octet-stream" sparkle:version="837" sparkle:shortVersionString="1.1.3"
-      match = page.match(%r{url=.*?/(?<tag>\d+)/DNDMe-(?<version>\d+)\.[dmg|zip].*shortVersionString="(?<short_version>1(?:\.\d+)*)"}i)
+      # e.g. url="https://dl.devmate.com/com.runtimesharks.dndme/837/1611389306/DNDMe-837.zip"
+      # length="10445785" type="application/octet-stream"
+      # sparkle:version="837" sparkle:shortVersionString="1.1.3"
+      match = page.match(%r{
+        url=.*?/(?<tag>\d+)
+        /DNDMe-(?<version>\d+)\.[dmg|zip]
+        .*shortVersionString="(?<short_version>1(?:\.\d+)*)"
+      }xi)
       "#{match[:short_version]},#{match[:version]}:#{match[:tag]}"
     end
   end
