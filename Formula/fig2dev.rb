@@ -14,7 +14,8 @@ class Fig2dev < Formula
   depends_on "netpbm"
 
   def install
-    #inreplace "fig2dev/dev/genemf.h", "#include <endian.h>", "#include <machine/endian.h>" #Now corrected upstream
+    # Now corrected upstream
+    # inreplace "fig2dev/dev/genemf.h", "#include <endian.h>", "#include <machine/endian.h>"
 
     args = %W[
       --prefix=#{prefix}
