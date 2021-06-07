@@ -29,7 +29,7 @@ class Xv < Formula
   depends_on "libxrandr"
   depends_on "libxt"
   depends_on "webp"
-  # depends on "zlib", uses macOS version
+  uses_from_macos "zlib"
 
   def install
     # Adapt the source files for macOS
