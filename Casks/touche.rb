@@ -11,6 +11,7 @@ cask "touche" do
     url :homepage
     strategy :page_match
     regex(/Touche(\d+(?:\.\d+)*)\.zip/i)
+    # e.g. href="Touche1.1.4.zip"
   end
 
   depends_on macos: ">= :sierra"
