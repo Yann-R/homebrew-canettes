@@ -10,7 +10,7 @@ cask "touche" do
   livecheck do
     url :homepage
     strategy :page_match
-    regex(%r{href=.*?/Touche(\d+(?:\.\d+)*)\.zip}i)
+    regex(/Touche(\d+(?:\.\d+)*)\.zip/i)
   end
 
   depends_on macos: ">= :sierra"
