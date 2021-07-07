@@ -5,6 +5,13 @@ class Rar < Formula
   sha256 "6da67bd6f617206b36e5fecf274ba3a0652bb166519852e1bc32342a8564b6c8"
   license "Trial(rar) Freeware(unrar)"
 
+  livecheck do
+    url "https://www.rarlab.com/download.htm"
+    strategy :page_match
+    regex(/rarosx-(\d+(:?\.\S+)*)\.t/i)
+    # e.g. rarosx-6.0.2b1.tar.gz
+  end
+
   head do
     url "https://www.rarlab.com/rar/rarosx-6.0.2b1.tar.gz"
     sha256 "3c968cc4b77a71fff955bfb2e31ec71fec688ca4fb7b8fd791f6e057809b808d"
