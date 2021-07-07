@@ -3,7 +3,7 @@ class Rar < Formula
   homepage "http://www.rarlab.com/"
   url "https://www.rarlab.com/rar/rarosx-6.0.2.tar.gz"
   sha256 "6da67bd6f617206b36e5fecf274ba3a0652bb166519852e1bc32342a8564b6c8"
-  license "Trial(rar) Freeware(unrar)" # See help integrated in binaries, and order.htm
+  license "40-Day-Trial(rar) Freeware(unrar)" # See help integrated in binaries, and order.htm
 
   livecheck do
     url "https://www.rarlab.com/download.htm"
@@ -33,13 +33,9 @@ class Rar < Formula
   end
 
   def install
-    # Renames binaries with version numbers to avoid conflicts
-    File.rename "rar", "rar-#{version}"
-    File.rename "unrar", "unrar-#{version}"
-
-    # Creates convenience symlinks
-    File.symlink "rar-#{version}", "rar"
-    File.symlink "unrar-#{version}", "unrar"
+    # Creates convenience symlinks (with version numbers to avoid conflicts)
+    File.symlink "rar", "rar-#{version}"
+    File.symlink "unrar", "unrar-#{version}"
 
     # Installs each command
     bin.install "rar-#{version}", "unrar-#{version}" # Avoids any conflict
