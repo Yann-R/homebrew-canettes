@@ -1,9 +1,9 @@
 class Rar < Formula
-  desc "Archive manager for RAR and other file formats (with man pages)"
+  desc "Archive manager for RAR and other formats (with man pages)"
   homepage "http://www.rarlab.com/"
   url "https://www.rarlab.com/rar/rarosx-6.0.2.tar.gz"
   sha256 "6da67bd6f617206b36e5fecf274ba3a0652bb166519852e1bc32342a8564b6c8"
-  license "Trial(rar) Freeware(unrar)"
+  license "Trial(rar) Freeware(unrar)" # See help integrated in binaries, and order.htm
 
   livecheck do
     url "https://www.rarlab.com/download.htm"
@@ -19,7 +19,7 @@ class Rar < Formula
 
   bottle :unneeded
 
-  # conflicts_with formula: "unrar" # Removed https://github.com/Homebrew/homebrew-core/pull/66609
+  # conflicts_with formula: "unrar" # Removed by https://github.com/Homebrew/homebrew-core/pull/66609
   conflicts_with cask: "rar"
 
   resource "man-rar" do
@@ -41,15 +41,14 @@ class Rar < Formula
     File.symlink "rar-#{version}", "rar"
     File.symlink "unrar-#{version}", "unrar"
 
-    # Installs each command (only not conflicting)
-    bin.install "rar-#{version}", "unrar-#{version}"
     # Installs each command
-    bin.install "rar", "unrar"
+    bin.install "rar-#{version}", "unrar-#{version}" # Avoids any conflict
+    bin.install "rar", "unrar" # Could conflict with other installs
 
     # Installs documentations and licence informations
     # doc.install Dir["*.*"] # Replaced by following lines, more selective
     lib.install "default.sfx"
-    etc.install "rarfiles.lst"
+    etc.install "rarfiles.lst" # As recommended in rar.txt
     doc.install "acknow.txt", "license.txt", "order.htm", "rar.txt", "readme.txt", "whatsnew.txt"
     resource("man-rar").stage { man1.install "src" => "rar.1" }
     resource("man-unrar").stage { man1.install "src" => "unrar.1" }
