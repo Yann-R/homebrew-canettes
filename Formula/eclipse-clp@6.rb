@@ -35,10 +35,10 @@ class EclipseClpAT6 < Formula
     inreplace "#{bin}/jeclipse", buildpath, libexec
     inreplace "#{bin}/tkeclipse", buildpath, libexec
     inreplace "#{bin}/tktools", buildpath, libexec
-    File.rename "#{bin}/eclipse", "#{bin}/eclipse-6"
-    File.rename "#{bin}/jeclipse", "#{bin}/jeclipse-6"
-    File.rename "#{bin}/tkeclipse", "#{bin}/tkeclipse-6"
-    File.rename "#{bin}/tktools", "#{bin}/tktools-6"
+    add_suffix "#{bin}/eclipse", version.major
+    add_suffix "#{bin}/jeclipse", version.major
+    add_suffix "#{bin}/tkeclipse", version.major
+    add_suffix "#{bin}/tktools", version.major
 
     # Installs auxiliary stuff
     libexec.install "lib"
@@ -47,13 +47,25 @@ class EclipseClpAT6 < Formula
     doc.install Dir["README*"]
     doc.install "legal"
     resource("eclipse-doc").stage do
-      inreplace "man/manl/tkeclipse.l", "In $ECLIPSEDIR/doc/", "In #{HOMEBREW_PREFIX}/share/doc/eclipse-clp/doc/"
+      inreplace "man/manl/eclipse.l", "In $ECLIPSEDIR/doc/", "In #{HOMEBREW_PREFIX}/share/doc/#{name}/doc/"
+      inreplace "man/manl/tkeclipse.l", "In $ECLIPSEDIR/doc/", "In #{HOMEBREW_PREFIX}/share/doc/#{name}/doc/"
+      inreplace "man/manl/tktools.l", "In $ECLIPSEDIR/doc/", "In #{HOMEBREW_PREFIX}/share/doc/#{name}/doc/"
+      add_suffix "man/manl/eclipse.l", version.major
+      add_suffix "man/manl/tkeclipse.l", version.major
+      add_suffix "man/manl/tktools.l", version.major
       man.install Dir["man/*"]
       doc.install "doc"
     end
   end
 
+  def add_suffix(file, suffix)
+    dir = File.dirname(file)
+    ext = File.extname(file)
+    base = File.basename(file, ext)
+    File.rename file, "#{dir}/#{base}-#{suffix}#{ext}"
+  end
+
   test do
-    system bin/"eclipse", "-e", "true"
+    system bin/"eclipse-#{version.major}", "-e", "true"
   end
 end
