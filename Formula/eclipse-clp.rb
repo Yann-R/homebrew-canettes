@@ -37,7 +37,7 @@ class EclipseClp < Formula
     # Builds the executable scripts & Installs to #{bin}
     system "(#{input})|./RUNME"
 
-	# Corrects paths
+    # Corrects paths
     inreplace "#{bin}/eclipse", buildpath, libexec
     inreplace "#{bin}/jeclipse", buildpath, libexec
     inreplace "#{bin}/tkeclipse", buildpath, libexec
@@ -51,7 +51,9 @@ class EclipseClp < Formula
     doc.install Dir["README*"]
     doc.install "legal"
     resource("eclipse-doc").stage do
-      inreplace "man/manl/tkeclipse.l", "In $ECLIPSEDIR/doc/", "In #{HOMEBREW_PREFIX}/share/doc/eclipse-clp/doc/"
+      inreplace "man/manl/eclipse.l", "In $ECLIPSEDIR/doc/", "In #{HOMEBREW_PREFIX}/share/doc/#{name}/doc/"
+      inreplace "man/manl/tkeclipse.l", "In $ECLIPSEDIR/doc/", "In #{HOMEBREW_PREFIX}/share/doc/#{name}/doc/"
+      inreplace "man/manl/tktools.l", "In $ECLIPSEDIR/doc/", "In #{HOMEBREW_PREFIX}/share/doc/#{name}/doc/"
       man.install Dir["man/*"]
       doc.install "doc"
     end
