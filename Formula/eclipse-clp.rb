@@ -1,14 +1,14 @@
 class EclipseClp < Formula
   desc "Open-source system for Constraint Logic Programming (CLP)"
   homepage "http://eclipseclp.org/"
-  url "http://eclipseclp.org/Distribution/CurrentRelease/6.1_164%20x86_64_macosx%20Intel-64bit-MacOS/eclipse_basic.tgz"
-  version "6.1-164"
-  sha256 "3946b7a3b3ed2f94b6cafe26e323ed848e4032da814cc7bd303d0d48ed326e69"
+  url "https://eclipseclp.org/Distribution/Builds/7.0_54/src/eclipse_src.tgz"
+  version "7.0-54" # Manual def, necessary to have the third numbering
+  sha256 "486aba056f530f1f2ca3924bf43b96614930d30613ac2e44f92535678ac6ad71"
 
   livecheck do
-    url "http://eclipseclp.org/Distribution/CurrentRelease/"
-    regex(/(\d+\.\d+_\d+).*MacOS/i)
-    # e.g. 6.1_164 x86_64_macosx Intel-64bit-MacOS
+    url "https://eclipseclp.org/Distribution/Builds/"
+    regex(%r{href="(\d+\.\d+_\d+)/"}i)
+    # e.g. href="7.0_54/"
     # and put '-' instead of '_' (not accepted by brew in versions)
     strategy :page_match do |page, regex|
       page.scan(regex).map { |match| match&.first&.sub("_", "-") }
@@ -16,21 +16,28 @@ class EclipseClp < Formula
   end
 
   resource "eclipse-doc" do
-    url "http://eclipseclp.org/Distribution/CurrentRelease/6.1_164%20x86_64_macosx%20Intel-64bit-MacOS/eclipse_doc.tgz"
-    sha256 "064b1e46d83150953af259346e2e3f97a0f96e3f1493829eea72978577dc6a2c"
+    url "https://eclipseclp.org/Distribution/Builds/7.0_54/common/eclipse_doc.tgz"
+    sha256 "b792eeb5914c56c7d01151cbedea28a8f4da37ad6762b593b0a3ede6eaf0ef22"
   end
 
   def install
+    ENV.deparallelize
+    arch = "ECLIPSEARCH=x86_64_macosx"
+    system "./configure", arch
+    system "make", "-if", "Makefile.x86_64_macosx", arch
+    # -i necessary above to ignore errors on auxiliary stuff
+
+    # Installs after compilation by using RUNME as recommended in INSTALL
     input = "echo"      # to accept arch
     input << "; echo"   # to accept current working dir
     input << "; echo #{bin}; echo" # to set install dir for executables
     input << "; echo a" # to accept Tcl/Tk config
     input << "; echo #{`/usr/libexec/java_home`}".chomp! # to set default java home
-    # input << "echo /Library/Java/Home; " # to set default java home from link to current
 
-    # Builds the executables & Installs to #{bin}
+    # Builds the executable scripts & Installs to #{bin}
     system "(#{input})|./RUNME"
 
+	# Corrects paths
     inreplace "#{bin}/eclipse", buildpath, libexec
     inreplace "#{bin}/jeclipse", buildpath, libexec
     inreplace "#{bin}/tkeclipse", buildpath, libexec
@@ -38,11 +45,13 @@ class EclipseClp < Formula
 
     # Installs auxiliary stuff
     libexec.install "lib"
+    libexec.install "lib_public"
     libexec.install "lib_tcl"
     include.install Dir["include/x86_64_macosx/*"]
     doc.install Dir["README*"]
     doc.install "legal"
     resource("eclipse-doc").stage do
+      inreplace "man/manl/tkeclipse.l", "In $ECLIPSEDIR/doc/", "In #{HOMEBREW_PREFIX}/share/doc/eclipse-clp/doc/"
       man.install Dir["man/*"]
       doc.install "doc"
     end
