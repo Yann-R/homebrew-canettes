@@ -15,6 +15,8 @@ class EclipseClpAT6 < Formula
     end
   end
 
+  bottle :unneeded
+
   resource "eclipse-doc" do
     url "http://eclipseclp.org/Distribution/CurrentRelease/6.1_164%20x86_64_macosx%20Intel-64bit-MacOS/eclipse_doc.tgz"
     sha256 "064b1e46d83150953af259346e2e3f97a0f96e3f1493829eea72978577dc6a2c"
@@ -43,7 +45,7 @@ class EclipseClpAT6 < Formula
     # Installs auxiliary stuff
     libexec.install "lib"
     libexec.install "lib_tcl"
-    include.install Dir["include/x86_64_macosx/*"]
+    include.install "include/x86_64_macosx/" => name # In a formula-name subdirectory
     doc.install Dir["README*"]
     doc.install "legal"
     resource("eclipse-doc").stage do
