@@ -32,29 +32,24 @@ class EclipseClpAT6 < Formula
     # Builds the executable scripts & Installs to #{bin}
     system "(#{input})|./RUNME"
 
-    # Corrects paths & names
-    inreplace "#{bin}/eclipse", buildpath, libexec
-    inreplace "#{bin}/jeclipse", buildpath, libexec
-    inreplace "#{bin}/tkeclipse", buildpath, libexec
-    inreplace "#{bin}/tktools", buildpath, libexec
-    add_suffix "#{bin}/eclipse", version.major
-    add_suffix "#{bin}/jeclipse", version.major
-    add_suffix "#{bin}/tkeclipse", version.major
-    add_suffix "#{bin}/tktools", version.major
+    # Corrects paths & names of executable scripts
+    %w[eclipse jeclipse tkeclipse tktools].each do |file|
+      inreplace "#{bin}/#{file}", buildpath, libexec
+      add_suffix "#{bin}/#{file}", version.major
+    end
 
     # Installs auxiliary stuff
     libexec.install "lib"
     libexec.install "lib_tcl"
-    include.install "include/x86_64_macosx/" => name # In a formula-name subdirectory
+    include.install "include/x86_64_macosx/" => name # rename as formula subdirectory
     doc.install Dir["README*"]
     doc.install "legal"
     resource("eclipse-doc").stage do
-      inreplace "man/manl/eclipse.l", "In $ECLIPSEDIR/doc/", "In #{HOMEBREW_PREFIX}/share/doc/#{name}/doc/"
-      inreplace "man/manl/tkeclipse.l", "In $ECLIPSEDIR/doc/", "In #{HOMEBREW_PREFIX}/share/doc/#{name}/doc/"
-      inreplace "man/manl/tktools.l", "In $ECLIPSEDIR/doc/", "In #{HOMEBREW_PREFIX}/share/doc/#{name}/doc/"
-      add_suffix "man/manl/eclipse.l", version.major
-      add_suffix "man/manl/tkeclipse.l", version.major
-      add_suffix "man/manl/tktools.l", version.major
+      %w[eclipse.l tkeclipse.l tktools.l].each do |file|
+        inreplace "man/manl/#{file}",
+                  "In $ECLIPSEDIR/doc/", "In #{HOMEBREW_PREFIX}/share/doc/#{name}/doc/"
+        add_suffix "man/manl/#{file}", version.major
+      end
       man.install Dir["man/*"]
       doc.install "doc"
     end
