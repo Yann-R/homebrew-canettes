@@ -4,6 +4,7 @@ class EclipseClpAT6 < Formula
   url "http://eclipseclp.org/Distribution/CurrentRelease/6.1_164%20x86_64_macosx%20Intel-64bit-MacOS/eclipse_basic.tgz"
   version "6.1-164" # Manual def, necessary to have the third numbering
   sha256 "3946b7a3b3ed2f94b6cafe26e323ed848e4032da814cc7bd303d0d48ed326e69"
+  license "Mozilla Public License 1.1"
 
   livecheck do
     url "http://eclipseclp.org/Distribution/CurrentRelease/"
