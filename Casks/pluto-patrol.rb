@@ -4,13 +4,14 @@ cask "pluto-patrol" do
 
   url "https://erikhinterbichler.com/blog/wp-content/uploads/software/PlutoPatrol.zip?v=1.0.1"
   name "Pluto Patrol"
-  desc "Retro arcade homage to the classic Moon Patrol"
+  desc "Retro arcade homage to the classic Moon Patrol (freeware)"
   homepage "https://erikhinterbichler.com/apps/pluto-patrol/"
 
   livecheck do
     url :homepage
     strategy :page_match
     regex(/PlutoPatrol.zip\?v=(\d+(?:\.\d+)*)/i)
+    # e.g. PlutoPatrol.zip?v=1.0.1
   end
 
   app "Pluto Patrol.app"
