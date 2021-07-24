@@ -3,7 +3,7 @@ class RarUnrar < Formula
   homepage "http://www.rarlab.com/"
   url "https://www.rarlab.com/rar/rarosx-6.0.2.tar.gz"
   sha256 "6da67bd6f617206b36e5fecf274ba3a0652bb166519852e1bc32342a8564b6c8"
-  license "40-Day-Trial(rar) Freeware(unrar)" # See help integrated in binaries, and order.htm
+  license "40-Day-Trial(rar) Freeware(unrar)" # See help in binaries, and order.htm in doc
 
   livecheck do
     url "https://www.rarlab.com/download.htm"
@@ -19,7 +19,7 @@ class RarUnrar < Formula
 
   bottle :unneeded
 
-  option "without-unrar", "Don't install unrar"
+  option "without-unrar", "Don't install unrar (but keep unrar-version)"
   # option "with-version",  "Add version number as suffix of executables"
 
   # conflicts_with formula: "unrar" # Removed by https://github.com/Homebrew/homebrew-core/pull/66609
