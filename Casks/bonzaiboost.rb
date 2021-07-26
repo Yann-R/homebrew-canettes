@@ -1,3 +1,4 @@
+
 cask "bonzaiboost" do
   version "1.6.4"
   sha256 "be7bc20ab567de92a80d18dc46ee61a55537748374f568ee3775ba7ef3b98276"
@@ -14,7 +15,7 @@ cask "bonzaiboost" do
   end
 
   depends_on formula: "gcc"
-  depends_on formula: "libomp"
+  # depends on formula: "libomp" # In fact uses libgomp included with GCC (not libomp/LLVM)
 
   binary "bonzaiboost-macosx-v#{version}", target: "bonzaiboost"
 
@@ -30,15 +31,13 @@ cask "bonzaiboost" do
                      ]
     end
 
-    # Adds possible gcc dirs (from homebrew) as relocation dirs to find required libs
-    %w[11 10 9 8 7 6 5].each do |major_gcc_version|
-      system_command "/usr/bin/install_name_tool",
-                     args: %W[
-                       -add_rpath
-                       #{HOMEBREW_PREFIX}/opt/gcc/lib/gcc/#{major_gcc_version}
-                       #{staged_path}/bonzaiboost-macosx-v#{version}
-                     ]
-    end
+    # Adds gcc dir (from homebrew) as relocation dir to find required libs
+    system_command "/usr/bin/install_name_tool",
+                   args: %W[
+                     -add_rpath
+                     #{HOMEBREW_PREFIX}/opt/gcc/lib/gcc/#{Formula["gcc"].version.major}
+                     #{staged_path}/bonzaiboost-macosx-v#{version}
+                   ]
   end
 
   caveats <<-EOS
