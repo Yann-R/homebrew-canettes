@@ -1,4 +1,4 @@
-ask "toshiba-e-studio" do
+cask "toshiba-e-studio" do
   version "7.111"
   sha256 "75ae436dad384e21ae14c540457f3b202229b958ce53475c68b92988da9b8515"
 
