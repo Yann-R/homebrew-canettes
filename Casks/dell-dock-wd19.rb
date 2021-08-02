@@ -25,7 +25,7 @@ cask "dell-dock-wd19" do
   uninstall delete: "#{staged_path}/" + File.basename("#{url}")
 
   caveats <<~EOS
-    The update utility is not available for macOS.
-    It must be run on a Windows (7, 8, 10) system to update the connected dock.
+    The update utility of the connected dock is not available for macOS.
+    This file format consists of a BIOS executable file. The Universal (Windows/MS DOS) format can be used to install from any Windows or MS DOS environment.
   EOS
 end
