@@ -1,9 +1,10 @@
 class EclipseClp < Formula
   desc "Open-source system for Constraint Logic Programming (CLP)"
   homepage "http://eclipseclp.org/"
-  url "https://eclipseclp.org/Distribution/Builds/7.0_54/src/eclipse_src.tgz"
-  version "7.0-54" # Manual def, necessary to have the third numbering
-  sha256 "486aba056f530f1f2ca3924bf43b96614930d30613ac2e44f92535678ac6ad71"
+  url "https://eclipseclp.org/Distribution/Builds/7.0_55/src/eclipse_src.tgz"
+  version "7.0-55" # Manual def, necessary to have the third numbering
+  sha256 "3f0f292edf3a3847898cc8bf258c927cffb90449914ee54738df07518ab8a8bf"
+  license "MPL-1.1"
 
   livecheck do
     url "https://eclipseclp.org/Distribution/Builds/"
@@ -16,8 +17,8 @@ class EclipseClp < Formula
   end
 
   resource "eclipse-doc" do
-    url "https://eclipseclp.org/Distribution/Builds/7.0_54/common/eclipse_doc.tgz"
-    sha256 "b792eeb5914c56c7d01151cbedea28a8f4da37ad6762b593b0a3ede6eaf0ef22"
+    url "https://eclipseclp.org/Distribution/Builds/7.0_55/common/eclipse_doc.tgz"
+    sha256 "041358bd262e304174379fed767ccab1fb42b8f77626636101dec11a9a1847a4"
   end
 
   def install
@@ -37,11 +38,10 @@ class EclipseClp < Formula
     # Builds the executable scripts & Installs to #{bin}
     system "(#{input})|./RUNME"
 
-    # Corrects paths
-    inreplace "#{bin}/eclipse", buildpath, libexec
-    inreplace "#{bin}/jeclipse", buildpath, libexec
-    inreplace "#{bin}/tkeclipse", buildpath, libexec
-    inreplace "#{bin}/tktools", buildpath, libexec
+    # Corrects paths of executable scripts
+    %w[eclipse jeclipse tkeclipse tktools].each do |file|
+      inreplace "#{bin}/#{file}", buildpath, libexec
+    end
 
     # Installs auxiliary stuff
     libexec.install "lib"
@@ -51,11 +51,12 @@ class EclipseClp < Formula
     doc.install Dir["README*"]
     doc.install "legal"
     resource("eclipse-doc").stage do
-      inreplace "man/manl/eclipse.l", "In $ECLIPSEDIR/doc/", "In #{HOMEBREW_PREFIX}/share/doc/#{name}/doc/"
-      inreplace "man/manl/tkeclipse.l", "In $ECLIPSEDIR/doc/", "In #{HOMEBREW_PREFIX}/share/doc/#{name}/doc/"
-      inreplace "man/manl/tktools.l", "In $ECLIPSEDIR/doc/", "In #{HOMEBREW_PREFIX}/share/doc/#{name}/doc/"
-      man.install Dir["man/*"]
       doc.install "doc"
+      %w[eclipse.l tkeclipse.l tktools.l].each do |file|
+        inreplace "man/manl/#{file}",
+                  "In $ECLIPSEDIR/doc/", "In #{HOMEBREW_PREFIX}/share/doc/#{name}/doc/"
+      end
+      man.install Dir["man/*"]
     end
   end
 
