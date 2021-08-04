@@ -16,8 +16,9 @@ class EclipseClp < Formula
     end
   end
 
+  vers = "#{version}".sub("-", "_")
   resource "eclipse-doc" do
-    url "https://eclipseclp.org/Distribution/Builds/7.0_55/common/eclipse_doc.tgz"
+    url "https://eclipseclp.org/Distribution/Builds/#{vers}/common/eclipse_doc.tgz"
     sha256 "041358bd262e304174379fed767ccab1fb42b8f77626636101dec11a9a1847a4"
   end
 
