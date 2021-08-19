@@ -1,6 +1,6 @@
 cask "touche" do
-  version "1.1.4"
-  sha256 "275a2885214befd088fe20707f306d3ad1743cf8181334ed4ef976391fff6c7f"
+  version "1.1.5"
+  sha256 "1eb9d5af040bbb4182cddb619a3709fba812dfcbe5b0657afd3fd46ac3ab52f8"
 
   url "https://redsweater.com/touche/Touche#{version}.zip"
   name "Touché"
