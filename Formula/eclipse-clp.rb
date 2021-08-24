@@ -2,8 +2,8 @@ class EclipseClp < Formula
   desc "Open-source system for Constraint Logic Programming (CLP)"
   homepage "http://eclipseclp.org/"
   url "https://eclipseclp.org/Distribution/Builds/7.0_55/src/eclipse_src.tgz"
-  version "7.0-55" # Manual def, necessary to have the third numbering
-  sha256 "3f0f292edf3a3847898cc8bf258c927cffb90449914ee54738df07518ab8a8bf"
+  version "7.0-57" # Manual def, necessary to have the third numbering
+  sha256 "d48186c0d15d4d5918d455e355cb40d67b9c159ee76f4e56b446830598ecd192"
   license "MPL-1.1"
 
   livecheck do
