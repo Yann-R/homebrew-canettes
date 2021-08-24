@@ -1,9 +1,9 @@
 class EclipseClp < Formula
   desc "Open-source system for Constraint Logic Programming (CLP)"
   homepage "http://eclipseclp.org/"
-  url "https://eclipseclp.org/Distribution/Builds/7.0_55/src/eclipse_src.tgz"
+  url "https://eclipseclp.org/Distribution/Builds/7.0_57/src/eclipse_src.tgz"
   version "7.0-57" # Manual def, necessary to have the third numbering
-  sha256 "d48186c0d15d4d5918d455e355cb40d67b9c159ee76f4e56b446830598ecd192"
+  sha256 "9cd221f0d16223c0029dc6c58e7037d510b30e481354d3d6d0b82a972634488c"
   license "MPL-1.1"
 
   livecheck do
@@ -19,7 +19,7 @@ class EclipseClp < Formula
   vers = "#{version}".sub("-", "_")
   resource "eclipse-doc" do
     url "https://eclipseclp.org/Distribution/Builds/#{vers}/common/eclipse_doc.tgz"
-    sha256 "041358bd262e304174379fed767ccab1fb42b8f77626636101dec11a9a1847a4"
+    sha256 "d48186c0d15d4d5918d455e355cb40d67b9c159ee76f4e56b446830598ecd192"
   end
 
   def install
