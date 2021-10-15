@@ -20,10 +20,11 @@ cask "akku" do
   uninstall login_item: "Akku"
 
   zap trash: [
-    "Library/PrivilegedHelperTools/io.jari.AkkuHelper",
+    "/Library/PrivilegedHelperTools/io.jari.AkkuHelper",
     "/Library/LaunchDaemons/io.jari.AkkuHelper.plist",
     "~/Library/Cache/Akku",
     "~/Library/Logs/Akku.log",
+    "~/Library/Preferences/io.jari.Akku.plist",
   ]
 
   caveats <<~EOS
