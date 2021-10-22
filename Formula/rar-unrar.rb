@@ -17,7 +17,7 @@ class RarUnrar < Formula
     sha256 "3c968cc4b77a71fff955bfb2e31ec71fec688ca4fb7b8fd791f6e057809b808d"
   end
 
-  bottle :unneeded
+  # bottle :unneeded	# Calling bottle :unneeded is deprecated! There is no replacement.
 
   option "without-unrar", "Don't install unrar (but keep unrar-version)"
   # option "with-version",  "Add version number as suffix of executables"
