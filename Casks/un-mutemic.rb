@@ -12,7 +12,7 @@ cask "un-mutemic" do
     strategy :github_latest
   end
 
-  app "[Un]MuteMic"
+  app "[Un]MuteMic.app"
 
   zap trash: "~/Library/Preferences/br.com.cocoaheads.MuteUnmuteMic.plist"
 end
