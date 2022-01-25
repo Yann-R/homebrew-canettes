@@ -1,20 +1,30 @@
 class RarUnrar < Formula
+  arch = Hardware::CPU.arm? ? "arm" : "x64"
+
   desc "Archive manager for RAR and other formats (with man pages)"
   homepage "http://www.rarlab.com/"
-  url "https://www.rarlab.com/rar/rarosx-6.0.2.tar.gz"
-  sha256 "6da67bd6f617206b36e5fecf274ba3a0652bb166519852e1bc32342a8564b6c8"
+  url "https://www.rarlab.com/rar/rarmacos-#{arch}-610.tar.gz"
+  if Hardware::CPU.arm?
+    sha256 "64eefac221a5e5f93934360114e5e0f1f750606e0e5d7823c780887f6630c13c"
+  else # Hardware::CPU.intel?
+    sha256 "5c68d6b55e483e498d1b2851ff293098a5b537ca8676dc5bb561d05abcd57664"
+  end
   license "40-Day-Trial(rar) Freeware(unrar)" # See help in binaries, and order.htm in doc
 
   livecheck do
     url "https://www.rarlab.com/download.htm"
     strategy :page_match
-    regex(/rarosx-(\d+(:?\.\S+)*)\.t/i)
-    # e.g. rarosx-6.0.2b1.tar.gz
+    regex(/rarmacos-#{arch}-(\d+(:?\.\S+)*)\.t/i)
+    # e.g. rarmacos-arm-6.0.2b1.tar.gz
   end
 
-  head do # To get the eventual beta version
-    url "https://www.rarlab.com/rar/rarosx-6.0.2b1.tar.gz"
-    sha256 "3c968cc4b77a71fff955bfb2e31ec71fec688ca4fb7b8fd791f6e057809b808d"
+  head do # To get the most recent beta version
+    url "https://web.archive.org/web/20220117015742/https://www.rarlab.com/rar/rarmacos-#{arch}-610b3.tar.gz"
+    if Hardware::CPU.arm?
+      sha256 "06ebdb216c2518e5314d15f76255d50c45d0ec45943a74253a357c23a73d5508"
+    else # Hardware::CPU.intel?
+      sha256 "1a63006cb8fc80a76cdb8fc3774c4ba0348c1a6264013e8186ca75d769a06077"
+    end
   end
 
   # bottle :unneeded	# Calling bottle :unneeded is deprecated! There is no replacement.
