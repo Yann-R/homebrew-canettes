@@ -6,7 +6,8 @@ cask "akku" do
       verified: "https://github.com/jariz/Akku/releases/download"
   name "Akku"
   desc "Missing bluetooth headset battery indicator app"
-  homepage "https://akku.software/"
+  # homepage "https://akku.software/" # Disabled
+  homepage "https://github.com/jariz/Akku#readme"
 
   livecheck do
     url "https://github.com/jariz/akku/releases"
@@ -14,6 +15,8 @@ cask "akku" do
     regex(%r{href=.*?/releases/tag/(\d+(?:\.\d+)*(?:-beta\.\d+))}i)
     # e.g. https://github.com/jariz/Akku/releases/tag/0.1.0-beta.11
   end
+
+  depends_on macos: "<= :big_sur"
 
   app "Akku.app"
 
