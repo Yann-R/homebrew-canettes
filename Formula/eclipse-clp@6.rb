@@ -33,11 +33,30 @@ class EclipseClpAT6 < Formula
     # Builds the executable scripts & Installs to #{bin}
     system "(#{input})|./RUNME"
 
-    # Corrects paths & names of executable scripts
+    # Sets env. var to suppress warning at launch of Tcl-Tk scripts in bin
+    %w[tkeclipse tktools].each do |file|
+      inreplace "#{bin}/#{file}", "exec", "export TK_SILENCE_DEPRECATION=1\nexec"
+    end    
+    # Corrects paths & names of executable scripts in bin
     %w[eclipse jeclipse tkeclipse tktools].each do |file|
       inreplace "#{bin}/#{file}", buildpath, libexec
       add_suffix "#{bin}/#{file}", version.major
     end
+    
+    # Corrects relative paths not supported in tcl script in lib
+    inreplace "lib_tcl/eclipse.tcl", "join . tkexdr", "join . #{libexec}/lib/x86_64_macosx/tkexdr"
+    inreplace "lib_tcl/eclipse.tcl", "join . tkeclipse", "join . #{libexec}/lib/x86_64_macosx/tkeclipse"
+    # Corrects (non existing) absolute path to 3rd-party lib and other details
+    tool = "/usr/bin/install_name_tool"
+    Dir["lib/x86_64_macosx/*.dylib"].each do |file|
+      system tool, "-change", "/Users/kish/thirdparty/mpir/x86_64_macosx/lib/libgmp.8.dylib", 
+             "libgmp.8.dylib", file # could also change to absolute path in libexec as hereunder
+    end
+    system tool, "-change", "/Users/kish/thirdparty/mpir/x86_64_macosx/lib/libgmp.8.dylib", 
+           "#{libexec}/lib/x86_64_macosx/libgmp.8.dylib", "lib/x86_64_macosx/eclipse.exe"
+    system tool, "-change", "libeclipse.dylib", 
+           "#{libexec}/lib/x86_64_macosx/libeclipse.dylib", "lib/x86_64_macosx/eclipse.exe"
+    system tool, "-change", "x86_64_macosx/bitmap.dylib", "bitmap.dylib", "lib/x86_64_macosx/ic.dylib"
 
     # Installs auxiliary stuff
     libexec.install "lib"
