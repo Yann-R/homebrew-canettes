@@ -42,7 +42,7 @@ class EclipseClpAT6 < Formula
       inreplace "#{bin}/#{file}", buildpath, libexec
       add_suffix "#{bin}/#{file}", version.major
     end
-    
+
     # Corrects relative paths not supported in tcl script in lib
     inreplace "lib_tcl/eclipse.tcl", "join . tkexdr", "join . #{libexec}/lib/x86_64_macosx/tkexdr"
     inreplace "lib_tcl/eclipse.tcl", "join . tkeclipse", "join . #{libexec}/lib/x86_64_macosx/tkeclipse"
