@@ -36,7 +36,7 @@ class EclipseClpAT6 < Formula
     # Sets env. var to suppress warning at launch of Tcl-Tk scripts in bin
     %w[tkeclipse tktools].each do |file|
       inreplace "#{bin}/#{file}", "exec", "export TK_SILENCE_DEPRECATION=1\nexec"
-    end    
+    end
     # Corrects paths & names of executable scripts in bin
     %w[eclipse jeclipse tkeclipse tktools].each do |file|
       inreplace "#{bin}/#{file}", buildpath, libexec
