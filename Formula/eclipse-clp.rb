@@ -16,7 +16,7 @@ class EclipseClp < Formula
     end
   end
 
-  vers = "#{version}".sub("-", "_")
+  vers = version.to_s.sub("-", "_")
   resource "eclipse-doc" do
     url "https://eclipseclp.org/Distribution/Builds/#{vers}/common/eclipse_doc.tgz"
     sha256 "d48186c0d15d4d5918d455e355cb40d67b9c159ee76f4e56b446830598ecd192"
@@ -39,10 +39,19 @@ class EclipseClp < Formula
     # Builds the executable scripts & Installs to #{bin}
     system "(#{input})|./RUNME"
 
+    # Sets env. var to suppress warning at launch of Tcl-Tk scripts in bin
+    %w[tkeclipse tktools].each do |file|
+      inreplace "#{bin}/#{file}", "exec", "export TK_SILENCE_DEPRECATION=1\nexec"
+    end
+
     # Corrects paths of executable scripts
     %w[eclipse jeclipse tkeclipse tktools].each do |file|
       inreplace "#{bin}/#{file}", buildpath, libexec
     end
+
+    # Corrects relative paths not supported in tcl script in lib
+    inreplace "lib_tcl/eclipse.tcl", "join . tkexdr", "join . #{libexec}/lib/x86_64_macosx/tkexdr"
+    inreplace "lib_tcl/eclipse.tcl", "join . tkeclipse", "join . #{libexec}/lib/x86_64_macosx/tkeclipse"
 
     # Installs auxiliary stuff
     libexec.install "lib"
