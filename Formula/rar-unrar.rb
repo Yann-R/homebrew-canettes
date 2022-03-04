@@ -3,27 +3,28 @@ class RarUnrar < Formula
 
   desc "Archive manager for RAR and other formats (with man pages)"
   homepage "http://www.rarlab.com/"
-  url "https://www.rarlab.com/rar/rarmacos-#{arch}-610.tar.gz"
+  url "https://www.rarlab.com/rar/rarmacos-#{arch}-611.tar.gz"
   if Hardware::CPU.arm?
-    sha256 "64eefac221a5e5f93934360114e5e0f1f750606e0e5d7823c780887f6630c13c"
+    sha256 "ab67c2e30dbfb49f86683dc44cf3fe5774800297652c382bdde13661c1114170"
   else # Hardware::CPU.intel?
-    sha256 "5c68d6b55e483e498d1b2851ff293098a5b537ca8676dc5bb561d05abcd57664"
+    sha256 "c875b102c72a9cb2ab1bd0a5b1a8b2eb049bc95cf8829bcde808f28ab0a620a4"
   end
   license "40-Day-Trial(rar) Freeware(unrar)" # See help in binaries, and order.htm in doc
 
   livecheck do
     url "https://www.rarlab.com/download.htm"
     strategy :page_match
-    regex(/rarmacos-#{arch}-(\d+(:?\.\S+)*)\.t/i)
+    regex(/rarmacos-#{arch}-(\d+(:?[\.b]\d+)*)\.t/i)
     # e.g. rarmacos-arm-6.0.2b1.tar.gz
   end
 
-  head do # To get the most recent beta version
-    url "https://web.archive.org/web/20220117015742/https://www.rarlab.com/rar/rarmacos-#{arch}-610b3.tar.gz"
+  head do # To get the most recent (beta) version
+    @headversion = "611b1"	# To avoid having only HEAD in #{version}
+    url "https://web.archive.org/web/20220117015742/https://www.rarlab.com/rar/rarmacos-#{arch}-#{@headversion}.tar.gz"
     if Hardware::CPU.arm?
-      sha256 "06ebdb216c2518e5314d15f76255d50c45d0ec45943a74253a357c23a73d5508"
+      sha256 "3c0346d6bf1c2f36417346e3e8eaa76f5e61310bfbbda0578ad2afc0961ebb5a"
     else # Hardware::CPU.intel?
-      sha256 "1a63006cb8fc80a76cdb8fc3774c4ba0348c1a6264013e8186ca75d769a06077"
+      sha256 "bf61f79d16c5ed249464f8a3a211c82b2a32f8da144f57af778132e860a23755"
     end
   end
 
@@ -46,16 +47,18 @@ class RarUnrar < Formula
   end
 
   def install
+    number = build.head? ? @headversion : version
+
     # Renames binaries with version numbers to avoid conflicts
-    File.rename "rar", "rar-#{version}"
-    File.rename "unrar", "unrar-#{version}"
+    File.rename "rar", "rar-#{number}"
+    File.rename "unrar", "unrar-#{number}"
 
     # Creates convenience symlinks
-    File.symlink "rar-#{version}", "rar"
-    File.symlink "unrar-#{version}", "unrar"
+    File.symlink "rar-#{number}", "rar"
+    File.symlink "unrar-#{number}", "unrar"
 
     # Installs each command
-    bin.install "rar-#{version}", "unrar-#{version}" # Avoids any conflict
+    bin.install "rar-#{number}", "unrar-#{number}" # Avoids any conflict
     bin.install "rar"
     bin.install "unrar" if build.with? "unrar"
 
