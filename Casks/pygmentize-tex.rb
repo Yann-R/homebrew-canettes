@@ -43,6 +43,6 @@ cask "pygmentize-tex" do
   caveats <<~EOS
     Don't forget to use option --shell-escape when invoking LaTeX from the command line,
     or Add this option in your GUI front-end settings:
-    e.g. TexShop > Preferences > Engine > Latex: add the option at the end of field.fox
+    e.g. TexShop > Preferences > Engine > Latex: add the option at the end of field.
   EOS
 end
