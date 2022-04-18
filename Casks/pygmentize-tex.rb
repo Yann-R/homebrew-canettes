@@ -7,8 +7,8 @@ cask "pygmentize-tex" do
   desc "Access to pygments from LaTeX documents (e.g. with package minted)"
   homepage "https://github.com/gpoore/minted"
 
-  # depends_on cask: "mactex"     # e.g. Contains minted, that requires pygmentize
-  depends_on formula: "pygments"  # Provides pygmentize executable
+  # depends_on cask: "mactex"		# e.g. Contains minted, that requires pygmentize
+  depends_on formula: "pygments"	# Provides pygmentize executable
 
   shimscript = "#{staged_path}/script.sh"
 
@@ -22,7 +22,7 @@ cask "pygmentize-tex" do
     File.write shimscript, <<~EOS
       #!/bin/sh
       # Adds a link to pygmentize within the TeX binaries:
-      ln -s #{HOMEBREW_PREFIX}/pygmentize /Library/TeX/texbin/pygmentize
+      ln -s #{HOMEBREW_PREFIX}/bin/pygmentize /Library/TeX/texbin/pygmentize
     EOS
   end
 
