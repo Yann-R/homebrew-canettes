@@ -31,7 +31,7 @@ cask "pygmentize4tex" do
     File.write shimscript, <<~EOS
       #!/bin/sh
       # Removes the added link to pygmentize within the TeX binaries:
-      rm /Library/TeX/texbin/pygmentize
+      rm -f /Library/TeX/texbin/pygmentize
     EOS
   end
 
