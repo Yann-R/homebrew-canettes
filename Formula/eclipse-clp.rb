@@ -34,7 +34,8 @@ class EclipseClp < Formula
     input << "; echo"   # to accept current working dir
     input << "; echo #{bin}; echo" # to set install dir for executables
     input << "; echo a" # to accept Tcl/Tk config
-    input << "; echo #{`/usr/libexec/java_home`}".chomp! # to set default java home
+    # input << "; echo #{`/usr/libexec/java_home`}".chomp! # to set default java home
+    input << "; echo s" # to skip java home, not hard-coded but replaced at run below
 
     # Builds the executable scripts & Installs to #{bin}
     system "(#{input})|./RUNME"
@@ -42,6 +43,11 @@ class EclipseClp < Formula
     # Sets env. var to suppress warning at launch of Tcl-Tk scripts in bin
     %w[tkeclipse tktools].each do |file|
       inreplace "#{bin}/#{file}", "exec", "export TK_SILENCE_DEPRECATION=1\nexec"
+    end
+
+    # Defines JRE_HOME for java at launch time in scripts (instead of hard-coded)
+    %w[eclipse jeclipse tkeclipse].each do |file|
+      inreplace "#{bin}/#{file}", "JRE_HOME:-", "JRE_HOME:-`/usr/libexec/java_home`"
     end
 
     # Corrects paths of executable scripts
