@@ -28,7 +28,8 @@ class EclipseClpAT6 < Formula
     input << "; echo"   # to accept current working dir
     input << "; echo #{bin}; echo" # to set install dir for executables
     input << "; echo a" # to accept Tcl/Tk config
-    input << "; echo #{`/usr/libexec/java_home`}".chomp! # to set default java home
+    # input << "; echo #{`/usr/libexec/java_home`}".chomp! # to set default java home
+    input << "; echo s" # to skip java home, not hard-coded but replaced at run below
 
     # Builds the executable scripts & Installs to #{bin}
     system "(#{input})|./RUNME"
@@ -37,6 +38,12 @@ class EclipseClpAT6 < Formula
     %w[tkeclipse tktools].each do |file|
       inreplace "#{bin}/#{file}", "exec", "export TK_SILENCE_DEPRECATION=1\nexec"
     end
+
+    # Defines JRE_HOME for java at launch time in scripts (instead of hard-coded)
+    %w[eclipse jeclipse tkeclipse].each do |file|
+      inreplace "#{bin}/#{file}", "JRE_HOME:-", "JRE_HOME:-`/usr/libexec/java_home`"
+    end
+
     # Corrects paths & names of executable scripts in bin
     %w[eclipse jeclipse tkeclipse tktools].each do |file|
       inreplace "#{bin}/#{file}", buildpath, libexec
@@ -46,15 +53,16 @@ class EclipseClpAT6 < Formula
     # Corrects relative paths not supported in tcl script in lib
     inreplace "lib_tcl/eclipse.tcl", "join . tkexdr", "join . #{libexec}/lib/x86_64_macosx/tkexdr"
     inreplace "lib_tcl/eclipse.tcl", "join . tkeclipse", "join . #{libexec}/lib/x86_64_macosx/tkeclipse"
+
     # Corrects (non existing) absolute path to 3rd-party lib and other details
     tool = "/usr/bin/install_name_tool"
     Dir["lib/x86_64_macosx/*.dylib"].each do |file|
-      system tool, "-change", "/Users/kish/thirdparty/mpir/x86_64_macosx/lib/libgmp.8.dylib", 
+      system tool, "-change", "/Users/kish/thirdparty/mpir/x86_64_macosx/lib/libgmp.8.dylib",
              "libgmp.8.dylib", file # could also change to absolute path in libexec as hereunder
     end
-    system tool, "-change", "/Users/kish/thirdparty/mpir/x86_64_macosx/lib/libgmp.8.dylib", 
+    system tool, "-change", "/Users/kish/thirdparty/mpir/x86_64_macosx/lib/libgmp.8.dylib",
            "#{libexec}/lib/x86_64_macosx/libgmp.8.dylib", "lib/x86_64_macosx/eclipse.exe"
-    system tool, "-change", "libeclipse.dylib", 
+    system tool, "-change", "libeclipse.dylib",
            "#{libexec}/lib/x86_64_macosx/libeclipse.dylib", "lib/x86_64_macosx/eclipse.exe"
     system tool, "-change", "x86_64_macosx/bitmap.dylib", "bitmap.dylib", "lib/x86_64_macosx/ic.dylib"
 
