@@ -24,9 +24,9 @@ class EclipseClp < Formula
 
   def install
     ENV.deparallelize
-    arch = "ECLIPSEARCH=x86_64_macosx"
-    system "./configure", arch
-    system "make", "-if", "Makefile.x86_64_macosx", arch
+    arch = `./ARCH`.chomp! # script used for the makefile name: Intel -> x86_64_macosx, Arm -> unknown
+    system "./configure", "ECLIPSEARCH=#{arch}"
+    system "make", "-if", "Makefile.#{arch}", "ECLIPSEARCH=#{arch}"
     # -i necessary above to ignore errors on auxiliary stuff
 
     # Installs after compilation by using RUNME as recommended in INSTALL
