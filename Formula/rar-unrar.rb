@@ -3,18 +3,18 @@ class RarUnrar < Formula
 
   desc "Archive manager for RAR and other formats (with man pages)"
   homepage "http://www.rarlab.com/"
-  url "https://www.rarlab.com/rar/rarmacos-#{arch}-611.tar.gz"
+  url "https://www.rarlab.com/rar/rarmacos-#{arch}-612.tar.gz"
   if Hardware::CPU.arm?
-    sha256 "ab67c2e30dbfb49f86683dc44cf3fe5774800297652c382bdde13661c1114170"
+    sha256 "491f345712a02eb26a3b424658c30652e22e2201a0c5c547fb97c25a756a264b"
   else # Hardware::CPU.intel?
-    sha256 "c875b102c72a9cb2ab1bd0a5b1a8b2eb049bc95cf8829bcde808f28ab0a620a4"
+    sha256 "f607ca12bdc313884c5a6f504fbf662a0511bf39fe04a9b2a694c986cd34bb67"
   end
   license "40-Day-Trial(rar) Freeware(unrar)" # See help in binaries, and order.htm in doc
 
   livecheck do
     url "https://www.rarlab.com/download.htm"
     strategy :page_match
-    regex(/rarmacos-#{arch}-(\d+(:?[\.b]\d+)*)\.t/i)
+    regex(/rarmacos-#{arch}-(\d+(:?[.b]\d+)*)\.t/i)
     # e.g. rarmacos-arm-6.0.2b1.tar.gz
   end
 
