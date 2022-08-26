@@ -1,18 +1,18 @@
 cask "dell-dock-wd19" do
-  version "01.00.24,A07"
-  sha256 "caa31e356f73582a09b6ac8814f7f328041d36aa42c08f58ffd0afce63d96e2d"
+  version "01.00.25,01.00.09"
+  sha256 "7681256847aa6cf2096ce2a2b6d5e7eca1bdaf208b7ac97f2dd50bbf476b2515"
 
-  url "https://dl.dell.com/FOLDER08239444M/1/DellDockFirmwarePackage_WD19_WD22_Series_01.00.24.exe"
+  url "https://dl.dell.com/FOLDER08634239M/1/DellDockFirmwarePackage_WD19_WD22_HD22_Series_01.00.09.exe"
   name "Dell Docking Station Firmware Update"
   desc "Dell Dock WD19 & WD22 Series Firmware Update Utility"
-  homepage "https://www.dell.com/support/home/en-us/drivers/driversdetails?driverid=dptw0&oscode=wt64a&productcode=dell-wd19-130w-dock"
+  homepage "https://www.dell.com/support/home/en-us/product-support/product/dell-wd19-130w-dock/drivers"
 
   livecheck do
-    # Actually not working since Dell website "hides" the subsections contents without manual click :-(
     # url "https://www.dell.com/support/home/en-us/product-support/product/dell-wd19-130w-dock/drivers"
-    # Then use a subpage instead (but maybe not stable over versions?)
-    url "https://www.dell.com/support/home/en-us/drivers/driversdetails?driverid=dptw0&oscode=wt64a&productcode=dell-wd19-130w-dock"
-    regex(/>(?<num>\d+(:?\.\d+)*), (?<tag>A\d+)</i)
+    # Actually not working since Dell website "hides" the subsections contents without manual click :-(
+    # Then use the detail subpage instead (but changes with each new release)
+    url "https://www.dell.com/support/home/en-us/drivers/driversdetails?driverid=5x3w3&oscode=wt64a&productcode=dell-wd19-130w-dock"
+    regex(/>(?<num>\d+(:?\.\d+)*), (?<tag>\d+(:?\.\d+)*)</i)
     # e.g. >01.00.21.01, A06<
     strategy :page_match do |page, regex|
       match = page.match(regex)
