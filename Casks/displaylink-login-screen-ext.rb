@@ -17,7 +17,7 @@ cask "displaylink-login-screen-ext" do
   depends_on macos: ">= :big_sur"
   depends_on cask: "displaylink-manager-app"
 
-  conflicts_with cask: "displaylink-login-extension"
+  conflicts_with cask: "displaylink-login-extension"	# From homebrew/cask-drivers
 
   pkg "DisplayLinkLoginScreenExtension.pkg"
 
