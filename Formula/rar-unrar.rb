@@ -19,12 +19,12 @@ class RarUnrar < Formula
   end
 
   head do # To get the most recent (beta) version
-    @headversion = "611b1"	# To avoid having only HEAD in #{version}
-    url "https://web.archive.org/web/20220117015742/https://www.rarlab.com/rar/rarmacos-#{arch}-#{@headversion}.tar.gz"
+    @headversion = "620b1"	# To avoid having only HEAD in #{version}
+    url "https://www.rarlab.com/rar/rarmacos-#{arch}-#{@headversion}.tar.gz"
     if Hardware::CPU.arm?
-      sha256 "3c0346d6bf1c2f36417346e3e8eaa76f5e61310bfbbda0578ad2afc0961ebb5a"
+      sha256 "49cec7783e331c2863fe926a15a557d839886e2bda44e8cbf05d56d322a26df2"
     else # Hardware::CPU.intel?
-      sha256 "bf61f79d16c5ed249464f8a3a211c82b2a32f8da144f57af778132e860a23755"
+      sha256 "d0a9f5238acc27fc08e4cb400917dc73aff282f768eb97e8fe2b9d893e43c8e4"
     end
   end
 
