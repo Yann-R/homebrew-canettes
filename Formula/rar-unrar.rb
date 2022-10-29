@@ -30,8 +30,8 @@ class RarUnrar < Formula
 
   # bottle :unneeded	# Calling bottle :unneeded is deprecated! There is no replacement.
 
+  option "without-rar", "Don't install rar (but keep unrar-version)"
   option "without-unrar", "Don't install unrar (but keep unrar-version)"
-  # option "with-version",  "Add version number as suffix of executables"
 
   # conflicts_with formula: "unrar" # Removed by https://github.com/Homebrew/homebrew-core/pull/66609
   # conflicts_with cask: "rar"
@@ -59,7 +59,7 @@ class RarUnrar < Formula
 
     # Installs each command
     bin.install "rar-#{number}", "unrar-#{number}" # Avoids any conflict
-    bin.install "rar"
+    bin.install "rar" if build.with? "rar"
     bin.install "unrar" if build.with? "unrar"
 
     # Installs documentations and license informations
