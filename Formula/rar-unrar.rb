@@ -19,8 +19,8 @@ class RarUnrar < Formula
   end
 
   head do # To get the most recent (beta) version
-    @headversion = "620b1"	# To avoid having only HEAD in #{version}
-    url "https://www.rarlab.com/rar/rarmacos-#{arch}-#{@headversion}.tar.gz"
+    $headversion = "620b1"	# To avoid having only HEAD in #{version}
+    url "https://www.rarlab.com/rar/rarmacos-#{arch}-#{$headversion}.tar.gz"
     if Hardware::CPU.arm?
       sha256 "49cec7783e331c2863fe926a15a557d839886e2bda44e8cbf05d56d322a26df2"
     else # Hardware::CPU.intel?
@@ -47,7 +47,7 @@ class RarUnrar < Formula
   end
 
   def install
-    number = build.head? ? @headversion : version
+    number = build.head? ? $headversion : version
 
     # Renames binaries with version numbers to avoid conflicts
     File.rename "rar", "rar-#{number}"
