@@ -1,18 +1,23 @@
-# Use a sha1 instead of a tag, as the author has not provided a tag for
-# this release. In fact, the author no longer uses this software, so it
-# is a candidate for removal if no new maintainer is found.
 class Contacts < Formula
   desc "Command-line tool to access macOS's Contacts (formerly 'Address Book')"
-  homepage "https://web.archive.org/web/20181108222900/gnufoo.org/contacts/contacts.html"
-  url "https://github.com/dhess/contacts/archive/4092a3c6615d7a22852a3bafc44e4aeeb698aa8f.tar.gz"
-  version "1.1a-3"
-  sha256 "e3dd7e592af0016b28e9215d8ac0fe1a94c360eca5bfbdafc2b0e5d76c60b871"
+  homepage "https://gnufoo.org/contacts/contacts.html"
+  # No releases or tags, then use a particular commit:
+  url "https://github.com/shanecelis/contacts/archive/466cde5ca750a173b6022bd5e78d0f490365b9b8.tar.gz"
+  version "2022-05-04" # date of the commit
+  sha256 "12ef66e95b0a7df204612b517fd8ccceda7ef139f14c4cb0ca37d4031c42e92d"
+  license "GPL-2.0-only"
+  head "https://github.com/shanecelis/contacts.git"
 
-  depends_on :xcode => :build
+  livecheck do
+    url "https://github.com/shanecelis/contacts/commits/master"
+    regex(/committed\n\s*<relative-time datetime="(.+)T.+Z"/i)
+    # e.g. committed\n  <relative-time datetime="2022-05-04T07:57:40Z" class="no-wrap">May 4, 2022</relative-time>
+    strategy :page_match
+  end
 
   def install
-    system "make", "SDKROOT=#{MacOS.sdk_path}"
-    bin.install "build/Deployment/contacts"
+    system "make"
+    bin.install "contacts"
     man1.install gzip("contacts.1")
   end
 
