@@ -3,11 +3,11 @@ class RarUnrar < Formula
 
   desc "Archive manager for RAR and other formats (with man pages)"
   homepage "http://www.rarlab.com/"
-  url "https://www.rarlab.com/rar/rarmacos-#{arch}-620.tar.gz"
+  url "https://www.rarlab.com/rar/rarmacos-#{arch}-621.tar.gz"
   if Hardware::CPU.arm?
-    sha256 "62e0624568e32f780ac114da21e8810206d5c692b9914ecbaf28cb33be7b2c72"
+    sha256 "391f4706546d793ceec90d3ab725d34ab153047170999e359147ef81f968813e"
   else # Hardware::CPU.intel?
-    sha256 "29b1545b70852dbe393cc45d10481c1f2f46101dc7a84919c02af43372760d1e"
+    sha256 "50dde0984b88a425f09b0dff97e29d6ab0182f2d43c46a0f00e0766df25319bc"
   end
   license "40-Day-Trial(rar) Freeware(unrar)" # See help in binaries, and order.htm in doc
 
