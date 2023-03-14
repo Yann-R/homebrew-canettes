@@ -9,8 +9,9 @@ cask "solstice" do
 
   livecheck do
     url :homepage
-    regex(/www.mersive.com\/files\/(?<num>\d+)\/.+Download for macOS/i)
-    # e.g. href="https://www.mersive.com/files/41693/" class="btn btn-primary ntm-download-btn">Download for macOS Laptop (dmg)
+    regex(%r{/files/(?<num>\d+)/.+Download for macOS Laptop}mi) # multi-lines case-insensitive
+    # e.g. <a href="/files/41693/" class="elementor-button-link elementor-button elementor-size-sm" role="button">
+    #      [...]<span class="elementor-button-text">Download for macOS Laptop (dmg)</span>
     strategy :page_match do |page, regex|
       match = page.match(regex)
       "#{match[:num]}" == "41693" ? version : "new"
