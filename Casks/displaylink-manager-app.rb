@@ -12,7 +12,7 @@ cask "displaylink-manager-app" do
     url "https://www.synaptics.com/products/displaylink-graphics/downloads/macos"
     strategy :page_match
     regex(/DisplayLink Manager Graphics Connectivity.*\n.*\n.*Release: (\d+(?:\.\d+)*) \|/i)	# Avoids Alpha or non standard version
-    # regex(/DisplayLink Manager Graphics Connectivity.*\n.*\n.*Release: (\d+(?:\.\d+)*)/i)   	# Any version, maybe ALpha
+    # regex(/DisplayLink Manager Graphics Connectivity.*\n.*\n.*Release: (\d+(?:\.\d+)*)/i)   	# Any version, maybe Alpha
     # e.g. <h4>DisplayLink Manager Graphics Connectivity</h4><p>Monterey 12, Big Sur 11</p><p>Release: 1.6.1 | <time datetime="00Z">Feb 23, 2022</time>
   end
 
@@ -20,7 +20,7 @@ cask "displaylink-manager-app" do
 
   conflicts_with cask: "displaylink"	# From homebrew/cask-drivers
 
-  pkg "DisplayLink Manager Graphics Connectivity#{version}-EXE.pkg"
+  pkg "DisplayLink Manager Graphics Connectivity#{version.csv.first}-EXE.pkg"
 
   uninstall pkgutil: "com.displaylink.displaylinkmanagerapp"
 
