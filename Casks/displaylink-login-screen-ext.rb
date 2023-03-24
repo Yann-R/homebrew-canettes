@@ -1,6 +1,8 @@
 cask "displaylink-login-screen-ext" do
-  version "2021-02" # "5.7.120" is in details of version 2021-02 obtained with app Suspicious Package
-  sha256 "2ca0b8d0c04b7131e8877f8e5b95b177b48d1ba57aff67ccb22e28720c79c08f"
+  version "1.8.0"
+  # version "2021-02" according to livecheck strategy :header_match
+  # version "5.7.120" according to details in pkg obtained with app Suspicious Package
+  sha256 "67f653f331e2e4d182325ded51a00701879d5f9af3da025684f2889777f6d597"
 
   url "https://www.displaylink.com/downloads/macos_extension"
   name "Login Screen Extension for DisplayLink Manager Graphics Connectivity"
@@ -9,8 +11,9 @@ cask "displaylink-login-screen-ext" do
 
   livecheck do
     url :url
-    strategy :header_match
-    regex(%r{https://.*exe_files/(.*)/macOS.*\.dmg}i)
+    strategy :extract_plist
+    # strategy :header_match
+    # regex(%r{https://.*exe_files/(.*)/macOS.*\.dmg}i)
     # e.g. Location: https://www.synaptics.com/sites/default/files/exe_files/2021-02/macOS%20App%20LoginExtension-EXE.dmg
   end
 
