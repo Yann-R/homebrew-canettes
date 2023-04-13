@@ -9,7 +9,7 @@ class Slackdump < Formula
   else # Hardware::CPU.intel?
     sha256 "95fc43f4e852b71fc709653d9ff51cc2579a18545739e3d7bffa6c4cf69f44af"
   end
-  version "2.3.1"
+  version "2.3.2"
   license "GPL-3.0-only"
 
   livecheck do
