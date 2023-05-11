@@ -3,12 +3,12 @@ class Slackdump < Formula
 
   desc "Slack Dumper for messages, users, files and emojis"
   homepage "https://github.com/rusq/slackdump"
-  version "2.3.3"
+  version "2.3.4"
   url "https://github.com/rusq/slackdump/releases/download/v#{version}/slackdump_macOS_#{arch}.tar.gz"
   if Hardware::CPU.arm?
-    sha256 "5348b0a834e3431a5d5b8d4b8fd9237c9991247c09667f093f5401f249711876"
+    sha256 "7505265fefebd4b7cbbd89c927f20c28826099f5d3cf84ee4a14cff5d8d6a4bd"
   else # Hardware::CPU.intel?
-    sha256 "198e6d2aaa5c9c7aaf0c18c92c962b2c093441f2d3ebc3067f43b9529ce00fdb"
+    sha256 "63b0d12e4c4fcb45d518f3cba80bfcecd4669c1958ba3e88477a50f4c2400114"
   end
   license "GPL-3.0-only"
 
