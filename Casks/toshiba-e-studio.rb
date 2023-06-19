@@ -15,7 +15,7 @@ cask "toshiba-e-studio" do
   end
 
   # Installs the 1st pkg for Color MFP (in double-sided mode)
-  container nested: "MacPPD/OSX10_7-/2-sided_default/TOSHIBA_ColorMFP.dmg.gz"
+  container nested: "MacPPD/OSX10_12-/2-sided_default/TOSHIBA_ColorMFP.dmg.gz"
 
   pkg "TOSHIBA ColorMFP.pkg"
 
