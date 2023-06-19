@@ -1,8 +1,8 @@
 cask "toshiba-e-studio" do
-  version "7.113.0.4"
-  sha256 "256cfedba3fc6500789b1ebcd2a9a4a9cc441557967ea442b134cbca8339e6a4"
+  version "7.115"
+  sha256 "3af5a216e6fad1d19c86718edd4c70272e49d0b7b42121329732e427626173da"
 
-  url "https://www.toshibatec.eu/publicsite-service/resource/download/pseu/en/82d76edc-94ac-4be3-bff8-5df869227837/a9d700ac68ca348fcd83adea3b3b2bac/TOSHIBA%20e-STUDIO%20MacPPD(10.7.x-11.x)%20v#{version}.zip"
+  url "https://www.toshibatec.eu/publicsite-service/resource/download/pseu/en/81c15239-1ebb-44fb-a9df-169ca32cc9db/3f21beedad329ade6e84ca67e84004fe/TOSHIBA_e-STUDIO_MacPPD(10.12.x-)_v#{version}.zip"
   name "Toshiba e-STUDIO MacPPD"
   desc "Drivers (Color & Mono) for Multi-Function Printer Toshiba e-STUDIO Series"
   homepage "https://www.toshibatec.eu/products/multifunctional-systems-and-printers/"
