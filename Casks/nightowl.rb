@@ -1,7 +1,7 @@
 # Copied and maintained from version retired from homebrew-cask
 # https://github.com/Homebrew/homebrew-cask/pull/149439
 cask "nightowl" do
-  version "0.4.5,40"
+  version "0.4.5.4,40"
   sha256 :no_check
 
   url "https://nightowlapp.co/files"
@@ -17,7 +17,7 @@ cask "nightowl" do
   auto_updates true
   depends_on macos: ">= :mojave"
 
-  pkg "nightowl-#{version.csv.first}.#{version.csv.second.chop}.pkg"
+  pkg "nightowl-#{version.csv.first}.pkg"
 
   uninstall pkgutil:   "com.mygreatcompany.pkg.NightOwl",
             launchctl: [
