@@ -17,7 +17,7 @@ cask "nightowl" do
   auto_updates true
   depends_on macos: ">= :mojave"
 
-  pkg "nightowl-#{version.csv.first}.pkg"
+  pkg "nightowl-#{version.csv.first}.#{version.csv.second.chop}.pkg"
 
   uninstall pkgutil:   "com.mygreatcompany.pkg.NightOwl",
             launchctl: [
