@@ -1,9 +1,9 @@
 class Lilypond < Formula
   desc "Music engraving program"
   homepage "https://lilypond.org/"
-  url "https://gitlab.com/lilypond/lilypond/-/releases/v2.24.1/downloads/lilypond-2.24.1-darwin-x86_64.tar.gz"
-  version "2.24.1" # Necessary to avoid getting 86_64
-  sha256 "4ea6c2013884677fde2d332864ec32ab6d04916f320a8d155c0d0b722275e2ea"
+  url "https://gitlab.com/lilypond/lilypond/-/releases/v2.24.2/downloads/lilypond-2.24.2-darwin-x86_64.tar.gz"
+  version "2.24.2" # Necessary to avoid getting 86_64
+  sha256 "f0741ddee56bd2d2caf591cb752f442df05853c9948cd687d42f90e416dce4bb"
   license "GPL-3.0-or-later"
 
   livecheck do
