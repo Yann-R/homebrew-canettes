@@ -9,16 +9,16 @@ class Contacts < Formula
   head "https://github.com/shanecelis/contacts.git"
 
   livecheck do
-    url "https://github.com/shanecelis/contacts/commits/master"
-    regex(/committed\n\s*<relative-time datetime="(.+)T.+Z"/i)
-    # e.g. committed\n  <relative-time datetime="2022-05-04T07:57:40Z" class="no-wrap">May 4, 2022</relative-time>
+    url "https://github.com/shanecelis/contacts/commits.atom"
+    regex(/<updated>(.+)T.+Z</i)
+    # e.g. <title>Recent Commits to contacts:master</title> <updated>2022-05-04T07:57:40Z</updated>
     strategy :page_match
   end
 
   def install
     system "make"
     bin.install "contacts"
-    man1.install gzip("contacts.1")
+    man1.install Utils::Gzip.compress("contacts.1")
   end
 
   test do
