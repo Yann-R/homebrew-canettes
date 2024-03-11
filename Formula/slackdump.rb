@@ -8,7 +8,7 @@ class Slackdump < Formula
   if Hardware::CPU.arm?
     sha256 "460034eb85f8119169fda0805430763bcf05f8962298ed39a019497b1b62959b"
   else # Hardware::CPU.intel?
-    sha256 "460034eb85f8119169fda0805430763bcf05f8962298ed39a019497b1b62959b"
+    sha256 "deb721e0e9c759fa1ae6162f956cbf6d1edefd996f802f0e245396e2c0ac6a5c"
   end
   license "GPL-3.0-only"
 
