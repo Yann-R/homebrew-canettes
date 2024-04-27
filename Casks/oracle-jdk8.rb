@@ -1,17 +1,19 @@
 cask "oracle-jdk8" do
   arch arm: "aarch64", intel: "x64"
 
-  version "1.8.0_401" # Release = Java 8 Update 401
-  sha256 arm:   "9211fb9f9fa18dc31e3d272f514d4194ac70fdb7343593c774ff8cb8f68e382f",
-         intel: "fa1f31f40aed887f03eb72e7a8d5c68ab6b533c464c1dd0db6b0bfe6a158cdb2"
+  version "1.8.0_411" # Release = Java 8 Update 411
+  sha256 arm:   "bf5e5321ce5d09f44e04dbe2a01086874d7a8f5cb809cac826a07e3718df2762",
+         intel: "88779b1586a99cd8925e00b49d45a8decfe2ae04b0e59673db19c93dd520ef57"
   
   # version in brew = major.minor.patch, then extract java update number from inside the patch version
   java_update = version.patch.sub(%r{.*_(\d+).*}, '\1') # e.g. 172 for version 1.8.0_172-b10
   java_release = version.minor+"u"+java_update # e.g. 8u172
   # Official URL, requires registering e-mail ID
-  #  e.g. https://download.oracle.com/otn/java/jdk/8u401-b10/4d245f941845490c91360409ecffb3b4/jdk-8u401-macosx-x64.dmg
+  #   e.g. https://download.oracle.com/otn/java/jdk/8u401-b10/4d245f941845490c91360409ecffb3b4/jdk-8u401-macosx-x64.dmg
   # url "https://download.oracle.com/otn/java/jdk/#{java_release}-b10/4d245f941845490c91360409ecffb3b4/jdk-#{java_release}-macosx-#{arch}.dmg"
+  #
   # Mirror URL, thanks to https://gist.github.com/wavezhang/ba8425f24a968ec9b2a8619d7c2d86a6
+  #   giving mirror-links page https://helpx.adobe.com/coldfusion/kb/coldfusion-downloads.html#downloads3
   url "https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java8/java#{java_release}/jdk/jdk-#{java_release}-macosx-#{arch}.dmg"
   name "Oracle Java Standard Edition Development Kit (JDK SE) version 8"
   # homepage "https://www.oracle.com/technetwork/java/javase/overview/index.html"
@@ -46,7 +48,7 @@ cask "oracle-jdk8" do
                          '/Library/PreferencePanes/JavaControlPanel.prefPane',
                          '/Library/Java/Home',
                        ],
-            rmdir:     "/Library/Java/JavaVirtualMachines/jdk-#{version.major_minor}.jdk" 
+            rmdir:     "/Library/Java/JavaVirtualMachines/jdk-#{version.major_minor}.jdk"  # e.g. 1.8 for 1.8.0_172-b10
   #         rmdir:     "/Library/Java/JavaVirtualMachines/jdk#{version.split('-')[0]}.jdk" # e.g. 1.8.0_172 for 1.8.0_172-b10
 
   zap trash: [
