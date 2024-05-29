@@ -1,8 +1,8 @@
 cask "dell-dock-wd19" do
-  version "01.00.25,01.00.09"
-  sha256 "7681256847aa6cf2096ce2a2b6d5e7eca1bdaf208b7ac97f2dd50bbf476b2515"
+  version "01.00.36,01.00.20"
+  sha256 "e65c07f1aab3e9834241d100d65fa611c73b1495ca39e84254b536ec206c52d0"
 
-  url "https://dl.dell.com/FOLDER08634239M/1/DellDockFirmwarePackage_WD19_WD22_HD22_Series_01.00.09.exe"
+  url "https://dl.dell.com/FOLDER10996411M/1/DellDockFirmwarePackage_WD19_WD22_Series_HD22_01.00.20.exe"
   name "Dell Docking Station Firmware Update"
   desc "Dell Dock WD19 & WD22 Series Firmware Update Utility"
   homepage "https://www.dell.com/support/home/en-us/product-support/product/dell-wd19-130w-dock/drivers"
@@ -10,13 +10,15 @@ cask "dell-dock-wd19" do
   livecheck do
     # url "https://www.dell.com/support/home/en-us/product-support/product/dell-wd19-130w-dock/drivers"
     # Actually not working since Dell website "hides" the subsections contents without manual click :-(
-    # Then use the detail subpage instead (but changes with each new release)
-    url "https://www.dell.com/support/home/en-us/drivers/driversdetails?driverid=5x3w3&oscode=wt64a&productcode=dell-wd19-130w-dock"
-    regex(/>(?<num>\d+(:?\.\d+)*), (?<tag>\d+(:?\.\d+)*)</i)
-    # e.g. >01.00.21.01, A06<
+    # Then use the detail subpage instead (but url changes with each new release)
+    # which gives dynamically the available other versions.
+    url "https://www.dell.com/support/home/en-us/drivers/driversdetails?driverid=t8hfj&oscode=wt64a&productcode=dell-wd19-130w-dock"
+    regex(/id=\"otherversion\" class=\"collapse\".+?>(?<num>\d+(:?\.\d+)*), (?<num2>\d+(:?\.\d+)*)</m) # Non-greedy after word collapse to get the 1st other version
+    # e.g. id="otherversion" class="collapse"...>01.00.32, 01.00.16<...>01.00.25, 01.00.09<
     strategy :page_match do |page, regex|
       match = page.match(regex)
-      "#{match[:num]},#{match[:tag]}"
+      otherversion = "#{match[:num]},#{match[:num2]}"
+      (otherversion > version)? otherversion : version
     end
   end
 
