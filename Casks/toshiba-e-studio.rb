@@ -1,33 +1,23 @@
 cask "toshiba-e-studio" do
-  version "7.115"
-  sha256 "3af5a216e6fad1d19c86718edd4c70272e49d0b7b42121329732e427626173da"
+  version :latest
+  sha256 :no_check
 
-  url "https://www.toshibatec.eu/publicsite-service/resource/download/pseu/en/81c15239-1ebb-44fb-a9df-169ca32cc9db/3f21beedad329ade6e84ca67e84004fe/TOSHIBA_e-STUDIO_MacPPD(10.12.x-)_v#{version}.zip"
-  name "Toshiba e-STUDIO MacPPD"
+  url "https://www.toshibatec.eu/products/multifunctional-systems-and-printers/"
+  name "Toshiba e-STUDIO MacPPD for Color & Mono"
   desc "Drivers (Color & Mono) for Multi-Function Printer Toshiba e-STUDIO Series"
   homepage "https://www.toshibatec.eu/products/multifunctional-systems-and-printers/"
 
   livecheck do
-    url "https://www.toshibatec.eu/products/multifunctional-systems-and-printers/e-studio400ac/"
-    strategy :page_match
-    regex(/TOSHIBA e-STUDIO MacPPD.*v(\d+(?:\.\d+)*)/i)
-    # e.g. TOSHIBA e-STUDIO MacPPD(10.7-) v7.111
+    skip "This cask only installs 2 depending casks"
   end
 
-  # Installs the 1st pkg for Color MFP (in double-sided mode)
-  container nested: "MacPPD/OSX10_12-/2-sided_default/TOSHIBA_ColorMFP.dmg.gz"
+  depends_on cask: "toshiba-color-mfp" # Cask from official brew
+  depends_on cask: "toshiba-mono-mfp"
 
-  pkg "TOSHIBA ColorMFP.pkg"
+  stage_only true
 
-  postflight do
-    # Installs the 2nd pkg for Monochrome MFP (in double-sided mode)
-    container nested: "MacPPD/OSX10_7-/2-sided_default/TOSHIBA_MonoMFP.dmg.gz"
-    pkg "TOSHIBA MonoMFP.pkg"
+  uninstall_preflight do
+    system_command "#{HOMEBREW_PREFIX}/bin/brew", args: ["uninstall", "--force", "toshiba-mono-mfp"]
+    system_command "#{HOMEBREW_PREFIX}/bin/brew", args: ["uninstall", "--force", "toshiba-color-mfp"]
   end
-
-  uninstall_postflight do
-    uninstall pkgutil: "com.toshiba.pde.x7.monomfp"
-  end
-
-  uninstall pkgutil: "com.toshiba.pde.x7.colormfp"
 end
