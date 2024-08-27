@@ -45,6 +45,6 @@ cask "pygmentize4tex" do
     or Add this option in your GUI front-end settings:
     e.g. TexShop > Preferences > Engine > Latex: add the option at the end of field.
 
-    N.B. Reinstalling LaTeX will remove this #{token}, then you should type: brew reinstall #{token}
+    N.B. Reinstalling LaTeX will disable this #{token}, then you should type: brew reinstall #{token}
   EOS
 end
