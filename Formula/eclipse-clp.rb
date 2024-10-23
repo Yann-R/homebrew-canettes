@@ -1,25 +1,38 @@
 class EclipseClp < Formula
   desc "Open-source system for Constraint Logic Programming (CLP)"
   homepage "http://eclipseclp.org/"
-  url "https://eclipseclp.org/Distribution/Builds/7.0_63/src/eclipse_src.tgz"
-  version "7.0-63" # Manual def, necessary to have the third numbering
-  sha256 "4341520c8224671deef18489cb1cdb884749cab0604d5e0dd73e472b04b6d1cd"
   license "MPL-1.1"
+
+  stable do
+    version "7.0_63" # Manual def, necessary to have the third numbering
+    # vers = version.to_s.sub("-", "_") # _ not recommended by brew in version
+    vers = version.to_s
+    url "https://eclipseclp.org/Distribution/Builds/#{vers}/src/eclipse_src.tgz"
+    sha256 "4341520c8224671deef18489cb1cdb884749cab0604d5e0dd73e472b04b6d1cd"
+    resource "eclipse-doc" do
+      url "https://eclipseclp.org/Distribution/Builds/#{vers}/common/eclipse_doc.tgz"
+      sha256 "dff7b910c5c2eb675efad209ae5280c0f7cf3d060a4c42e7486678a602ffbe5f"
+    end
+  end
 
   livecheck do
     url "https://eclipseclp.org/Distribution/Builds/"
     regex(%r{href="(\d+\.\d+_\d+)/"}i)
     # e.g. href="7.0_54/"
-    # and put '-' instead of '_' (not accepted by brew in versions)
-    strategy :page_match do |page, regex|
-      page.scan(regex).map { |match| match&.first&.sub("_", "-") }
-    end
+    # and put '-' instead of '_' (not recommended by brew in version)
+    # strategy :page_match do |page, regex|
+    #  page.scan(regex).map { |match| match&.first&.sub("_", "-") }
+    # end
   end
 
-  vers = version.to_s.sub("-", "_")
-  resource "eclipse-doc" do
-    url "https://eclipseclp.org/Distribution/Builds/#{vers}/common/eclipse_doc.tgz"
-    sha256 "dff7b910c5c2eb675efad209ae5280c0f7cf3d060a4c42e7486678a602ffbe5f"
+  head do # unfrozen version in http://eclipseclp.org/relnotes/index.html
+    headversion = "7.1_13"
+    url "https://eclipseclp.org/Distribution/Builds/#{headversion}/src/eclipse_src.tgz"
+    sha256 "c3696032683b0c95fd4cfa805692ffbe780f79f4b6a252cf9c105165c02ec872"
+    resource "eclipse-doc" do
+      url "https://eclipseclp.org/Distribution/Builds/#{headversion}/common/eclipse_doc.tgz"
+      sha256 "ce10d6e2776fd519f006acb9c38dedb680926d521093cd786741a082a3eb0ad7"
+    end
   end
 
   def install
