@@ -8,7 +8,7 @@ cask "solstice" do
   homepage "https://www.mersive.com/download/"
 
   livecheck do
-    url :stable # Note: URL /files/41693/ remained the same over versions
+    url :url # Note: URL /files/41693/ remained the same over versions
     strategy :header_match
   end
 
