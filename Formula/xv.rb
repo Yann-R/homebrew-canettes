@@ -7,17 +7,17 @@ class Xv < Formula
   url "https://gitlab.com/DavidGriffith/xv.git",
       revision: "c704ea045d1243a19d97ffd0eb74997c413b89d6",
       shallow:  false
-  version "3.10a-2019-09-25T22:41:08Z" # date of the last patch on original version 3.10a
+  version "3.10a-20190925@224108Z" # date of the last patch on original version 3.10a
   # license "shareware for personnal use only"
   head "https://gitlab.com/DavidGriffith/xv.git"
 
   livecheck do
     url "https://gitlab.com/DavidGriffith/xv.atom"
-    regex(%r{<updated>(?<date>.+)</updated>}i)
+    regex(%r{<updated>(?<year>.+)-(?<month>.+)-(?<day>.+)T(?<hr>.+):(?<min>.+):(?<sec>.+)</updated>}i)
     # e.g. <updated>2019-09-25T22:41:08Z</updated>
     strategy :page_match do |page, regex|
       match = page.match(regex)
-      "3.10a-#{match[:date]}"
+      "3.10a-#{match[:year]}#{match[:month]}#{match[:day]}@#{match[:hr]}#{match[:min]}#{match[:sec]}"
     end
   end
 
@@ -38,10 +38,14 @@ class Xv < Formula
     inreplace "xv.h", "#include <stdio.h>", "#include <stdio.h>\n#include <limits.h>"
     inreplace "xvjp2k.c", "jas_memdump(FILE *fp,void *data,size_t len)",
               "jas_memdump(FILE *fp,const void *data,size_t len)"
+    inreplace "xvmisc.c", "int           keepsize;",
+              "int           keepsize;\nint           userspec;"
 
     # Adapt the source files for brewing
     inreplace "xv.h", "#define REVDATE   \"version 3.10a-jumboFix+Enh of 20081216 (interim!)\"",
-              "#define REVDATE   \"version #{version}-jumboFix+Enh of 20081216 (David Griffith\'s release)\""
+              "#define REVDATE   \"version 3.10a-jumboFix+Enh of #{version.to_str[6,13]} (David Griffith\'s release)\""
+    inreplace "xv.h", "#define VERSTR    \"3.10a-20081216\"",
+              "#define VERSTR    \"3.10a-#{version.to_str[6,8]}\""
     inreplace "Makefile", "/usr/X11R6/lib", "#{HOMEBREW_PREFIX}/lib"
     # To add X11 include as last, avoids imposing its embedded png includes
     inreplace "Makefile", '-DXVEXECPATH=\"$(LIBDIR)\"',
@@ -51,7 +55,7 @@ class Xv < Formula
     inreplace "Makefile", "PNGDIR = /usr", "PNGDIR = #{HOMEBREW_PREFIX}"
     # inreplace "Makefile", "ZLIBDIR = /usr", "ZLIBDIR = #{HOMEBREW_PREFIX}" # Uses macOS version
     # To enable Jpeg 2000
-    inreplace "Makefile", "#JP2K    = -DDOJP2K", "JP2K    = -DDOJP2K"
+    # inreplace "Makefile", "#JP2K    = -DDOJP2K", "JP2K    = -DDOJP2K" # TODO: re-enable Jpeg 2000 later
     inreplace "Makefile", "#JP2KDIR = /usr/local/lib", "JP2KDIR = #{HOMEBREW_PREFIX}"
     inreplace "Makefile", "#JP2KINC = -I$(JP2KDIR)", "JP2KINC = -I$(JP2KDIR)/include"
     inreplace "Makefile", "#JP2KLIB = -L$(JP2KDIR) -ljasper", "JP2KLIB = -L$(JP2KDIR)/lib -ljasper"
@@ -60,7 +64,7 @@ class Xv < Formula
     # To avoid big ps documentation (but keep pdf version)
     inreplace "Makefile", "docs/xvdocs.ps", ""
     inreplace "Makefile", "$(DESTDIR)$(DOCDIR)/xvdocs.ps", ""
-
+    
     # Make & Install
     system "make", "install"
   end
