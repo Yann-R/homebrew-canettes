@@ -27,10 +27,11 @@ class Xv < Formula
   uses_from_macos "zlib"
 
   def install
-    system "cmake", "-S", ".", "-B", "tmp_cmake", *std_cmake_args # Build makefile
+    system "cmake", "-S", ".", "-B", "tmp_cmake", *std_cmake_args # Create makefile
     system "cmake", "--build", "tmp_cmake", "--target", "install" # Build & Install
 
-    man5.install Dir["#{doc}/formats/*.5"]      # Note: then *.5 removed from #{doc}
+    # Following man5 install disabled (kept in doc) due to man conflict with netpbm
+    # man5.install Dir["#{doc}/formats/*.5"]    # Move *.5 from doc to man pages
     Utils::Gzip.compress *Dir["#{man}/**/*.*"]  # All dirs, recursively
     system "ps2pdf", "#{doc}/manuals/xvtitle.ps", "#{doc}/manuals/xvtitle.pdf"
     File.unlink "#{doc}/manuals/xvdocs.ps"  if File.exist? "#{doc}/manuals/xvdocs.pdf"
