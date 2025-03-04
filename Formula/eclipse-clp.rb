@@ -5,7 +5,7 @@ class EclipseClp < Formula
 
   stable do
     version "7.0_63" # Manual def, necessary to have the third numbering
-    # vers = version.to_s.sub("-", "_") # _ not recommended by brew in version
+    # vers = version.to_s.sub("-", "_") # _ in version was not recommended by brew
     vers = version.to_s
     url "https://eclipseclp.org/Distribution/Builds/#{vers}/src/eclipse_src.tgz"
     sha256 "4341520c8224671deef18489cb1cdb884749cab0604d5e0dd73e472b04b6d1cd"
@@ -16,13 +16,9 @@ class EclipseClp < Formula
   end
 
   livecheck do
-    url "https://eclipseclp.org/Distribution/Builds/"
-    regex(%r{href="(\d+\.\d+_\d+)/"}i)
+    url "https://eclipseclp.org/Distribution/Builds/" # Not equivalent to url :stable
+    regex(%r{href="(\d+\.\d+_\d+)/"})
     # e.g. href="7.0_54/"
-    # and put '-' instead of '_' (not recommended by brew in version)
-    # strategy :page_match do |page, regex|
-    #  page.scan(regex).map { |match| match&.first&.sub("_", "-") }
-    # end
   end
 
   head do # unfrozen version in http://eclipseclp.org/relnotes/index.html
@@ -36,22 +32,33 @@ class EclipseClp < Formula
   end
 
   def install
-    ENV.deparallelize
-    arch = `./ARCH`.chomp! # script used for the makefile name: Intel -> x86_64_macosx, Arm -> unknown
+    # arch = `./ARCH`.chomp! # script used for the makefile name: Intel -> x86_64_macosx, Arm -> unknown
+    if Hardware::CPU.intel?
+      arch = "x86_64_macosx"
+    else # Hardware::CPU.arm? # Not yet handled by upstream sources, unlike x86_64_macosx
+      arch = "aarch64_macosx"
+      inreplace "configure", "x86_64-*-darwin*)", "aarch64-*-darwin*)" # To avoid direct exit as unknown architecture
+      inreplace "configure" do |s|
+        s.gsub! "x86_64_macosx", arch # To build in correctly named subdirs (better but not necessary)
+      end
+    end
     inreplace "configure", 'TCL_REQUIRED="8.6 8.5 8.4 8.3', 'TCL_REQUIRED="8.5'
-    system "./configure", "ECLIPSEARCH=#{arch}"
-    system "make", "-if", "Makefile.#{arch}", "ECLIPSEARCH=#{arch}"
+
+    # Builds the software
+    system "./configure"
+    ENV.deparallelize
+    system "make", "-if", "Makefile.#{arch}"
     # -i necessary above to ignore errors on auxiliary stuff
 
-    # Installs after compilation by using RUNME as recommended in INSTALL
-    input = "echo"      # to accept arch
-    input << "; echo"   # to accept current working dir
-    input << "; echo #{bin}; echo" # to set install dir for executables
-    input << "; echo a" # to accept Tcl/Tk config
+    # Installs after build by using RUNME as recommended in INSTALL
+    input = "echo #{arch}; echo"    # to set and confirm arch
+    input << "; echo"               # to accept current working dir
+    input << "; echo #{bin}; echo"  # to set install dir for executables
+    input << "; echo a"             # to accept Tcl/Tk config
     # input << "; echo #{`/usr/libexec/java_home`}".chomp! # to set default java home
     input << "; echo s" # to skip java home, not hard-coded but replaced at run below
 
-    # Builds the executable scripts & Installs to #{bin}
+    # Creates the executable scripts & Installs to #{bin}
     system "(#{input})|./RUNME"
 
     # Sets env. var to suppress warning at launch of Tcl-Tk scripts in bin
@@ -77,7 +84,7 @@ class EclipseClp < Formula
     libexec.install "lib"
     libexec.install "lib_public"
     libexec.install "lib_tcl"
-    include.install Dir["include/x86_64_macosx/*"]
+    include.install Dir["include/#{arch}/*"]
     doc.install Dir["README*"]
     doc.install "legal"
     resource("eclipse-doc").stage do
