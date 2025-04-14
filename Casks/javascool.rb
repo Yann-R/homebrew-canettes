@@ -1,9 +1,9 @@
 cask "javascool" do
-  version "4.0.1329,2017-06-10"
-  sha256 "7553816eba2c2a65117a0be3d98168b8e176e7782b9984be7c9e10fddc09f96c"
+  version "4.0.1337,2018-05-10"
+  sha256 "f019b4f6f07f7c331d4fdf6141971307978639abbcd496b310a626a924594b22"
 
   # url "http://javascool.gforge.inria.fr/javascool-proglets.jar" # Official no longer available
-  url  "https://web.archive.org/web/20170621094236/http://javascool.gforge.inria.fr:80/javascool-proglets.jar"
+  url  "https://github.com/svn2github/javascool/raw/refs/heads/master/javascool_V4/work/dist/javascool-proglets.jar"
   name "Java's Cool 4"
   # see description "https://www.enseignementsup-recherche.gouv.fr/ressources-pedagogiques/notice/view/INRIA-Javascool"
   desc "Java-based Macro-language and ressources to learn Programming and Algorithms"
