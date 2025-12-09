@@ -3,11 +3,11 @@ class RarUnrar < Formula
 
   desc "Archive manager for RAR and other formats (with man pages)"
   homepage "http://www.rarlab.com/"
-  url "https://www.rarlab.com/rar/rarmacos-#{arch}-710.tar.gz"
+  url "https://www.rarlab.com/rar/rarmacos-#{arch}-712.tar.gz"
   if Hardware::CPU.arm?
-    sha256 "81b6c5ca75583d5b0e340e0683c045a7327fe08c8d8424ff286855d6f8ed2054"
+    sha256 "95078e0f59ffd05ebe665a557e9d4d1c073156a2777d9167f6c420ee448a83c5"
   else # Hardware::CPU.intel?
-    sha256 "cd835c92bc4e02e82c34510d8cd4466859866856eb46fef78e911e4e6425a3c0"
+    sha256 "5b3a79233a5ce2eb0d95d0446f739909e3720724d325e828c5b0c3f0736708fa"
   end
   license "40-Day-Trial(rar) Freeware(unrar)" # See help in binaries, and order.htm in doc
 
@@ -19,12 +19,12 @@ class RarUnrar < Formula
   end
 
   head do # To get the most recent (beta) version
-    $headversion = "711b1"	# To avoid having only HEAD in #{version}
+    $headversion = "720b1"	# To avoid having only HEAD in #{version}
     url "https://www.rarlab.com/rar/rarmacos-#{arch}-#{$headversion}.tar.gz"
     if Hardware::CPU.arm?
-      sha256 "c08f454b65b71dd6420727d4215e743275fe28243de21ca604a69c90f150df10"
+      sha256 "93d7887bef698363775e608e7384591ae93bbe3bc5fade4c012c9cfafac9cc32"
     else # Hardware::CPU.intel?
-      sha256 "5e7793f0128bd2fbd78cecf16c88b30e7361d4bb907fc982402a261c68968ef9"
+      sha256 "5c9c373bd95891cea39484cd5b2c2670928ec3b3d80dcc1c9aa5e15b713fc207"
     end
   end
 
