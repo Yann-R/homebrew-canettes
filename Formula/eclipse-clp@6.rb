@@ -24,11 +24,12 @@ class EclipseClpAT6 < Formula
   end
 
   def install
-    input = "echo"      # to accept arch
-    input << "; echo"   # to accept current working dir
+    # input = "echo" # to accept current arch (Not suited for Arm since binaries are Intel-only)
+    input = "echo x86_64_macosx; echo" # to set and confirm Intel arch
+    input << "; echo" # to accept current working dir
     input << "; echo #{bin}; echo" # to set install dir for executables
     input << "; echo a" # to accept Tcl/Tk config
-    # input << "; echo #{`/usr/libexec/java_home`}".chomp! # to set default java home
+    # input << "; echo #{`/usr/libexec/java_home`}".chomp! # to set current java home
     input << "; echo s" # to skip java home, not hard-coded but replaced at run below
 
     # Builds the executable scripts & Installs to #{bin}
