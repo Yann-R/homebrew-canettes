@@ -14,7 +14,7 @@ cask "touche" do
     # e.g. href="Touche1.1.4.zip"
   end
 
-  depends_on macos: ">= :sierra"
+  # depends_on macos: ">= :sierra"	# disabled! There is no replacement
 
   app "Touché.app"
 
