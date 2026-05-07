@@ -1,9 +1,9 @@
 cask "oracle-jdk8" do
   arch arm: "aarch64", intel: "x64"
 
-  version "1.8.0_481" # Java 8 Update 481
-  sha256 arm:   "5df9011873c4294acba1c213703d6e5616a56565b2885ce9960c4a627456149f",
-         intel: "228500abaa0da2334241d839f894b954fbe8f1e7bdcb4c8b9a3666c4f4a221a2"
+  version "1.8.0_491" # Java 8 Update 491
+  sha256 arm:   "54883c91f8b9158097839dd5248bb3caec9599b1fc75ab327d153cdb11f071e6",
+         intel: "14fddf6574f4be15737b06878499062c7439cddf418d26f391325053acd0a6e6"
 
   # version in brew = major.minor.patch, then extract java update number from inside the patch version
   java_update = version.patch.sub(/.*_(\d+).*/, '\1') # e.g. 172 for version 1.8.0_172-b10
