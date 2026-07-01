@@ -2,7 +2,7 @@ class Xv < Formula
   desc "Interactive image manipulation program for the X Window System"
   # homepage "http://www.trilon.com/xv/"          	# Discontinued
   homepage "https://github.com/jasper-software/xv"	# Revival
-  url "https://github.com/jasper-software/xv/releases/download/v6.1.0/xv-3.10a-js-6.1.0.tar.gz"
+  url "https://github.com/jasper-software/xv/releases/download/v6.2.0/xv-3.10a-js-6.2.0.tar.gz"
   sha256 "bfd0df563a7d5e6632fd22a4789d6a2e5ec24c83027d058a563eebc6dc74ca9c"
   # license "shareware for personal use only"
   head "https://github.com/jasper-software/xv.git", branch: "main"
