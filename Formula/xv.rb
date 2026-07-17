@@ -36,6 +36,7 @@ class Xv < Formula
     system "ps2pdf", "#{doc}/manuals/xvtitle.ps", "#{doc}/manuals/xvtitle.pdf"
     File.unlink "#{doc}/manuals/xvdocs.ps"  if File.exist? "#{doc}/manuals/xvdocs.pdf"
     File.unlink "#{doc}/manuals/xvtitle.ps" if File.exist? "#{doc}/manuals/xvtitle.pdf"
+    share.install "data" # Sample images
   end
 
   test do
