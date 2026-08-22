@@ -1,6 +1,6 @@
 cask "tchap" do
-  version "4.21.1"
-  sha256 "bfa1d230d92c0b935467a4a0e5840dabe88b6f9de192778c83b3c623f92aad2c"
+  version "4.21.3"
+  sha256 "79ce114f81f81bd1aa1f670d4a52415a193244baf8c4b7c2cf5eb58bb7d653bf"
 
   url "https://github.com/tchapgouv/tchap-desktop/releases/download/tchap-#{version}/Tchap-prod_#{version}_universal.dmg"
   name "Tchap"
