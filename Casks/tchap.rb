@@ -1,6 +1,6 @@
 cask "tchap" do
-  version "4.21.3"
-  sha256 "79ce114f81f81bd1aa1f670d4a52415a193244baf8c4b7c2cf5eb58bb7d653bf"
+  version "4.21.4"
+  sha256 "5ce070af11956a83f68a10373494240bd08f849fbfdcebad954a69d3b3afd52a"
 
   url "https://github.com/tchapgouv/tchap-desktop/releases/download/tchap-#{version}/Tchap-prod_#{version}_universal.dmg"
   name "Tchap"
@@ -12,6 +12,7 @@ cask "tchap" do
     strategy :github_latest
   end
 
+  auto_updates true
   depends_on :macos
 
   app "Tchap.app"
