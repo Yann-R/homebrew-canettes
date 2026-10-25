@@ -1,9 +1,9 @@
 cask "oracle-jdk8" do
   arch arm: "aarch64", intel: "x64"
 
-  version "1.8.0_501" # Java 8 Update 501
-  sha256 arm:   "80b1bad35060cf4ab9eb87a8a4743d7c3148ee98ddf6c57a1a0092564f152f76",
-         intel: "eaac207b19d94650794c83a34b73cdfa29c2d2144c17efa2e57c7e8d236e0fae"
+  version "1.8.0_511" # Java 8 Update 511
+  sha256 arm:   "a15a4ce28e829e70595eb07f66fa3e674e2d21cb8e2ab6ed236a8ad8727742d4",
+         intel: "01ab86245ce07eb720c10e8b0e5c58ee118353997ae335775301361f53ff669c"
 
   # version in brew = major.minor.patch, then extract java update number from inside the patch version
   java_update = version.patch.sub(/.*_(\d+).*/, '\1') # e.g. 172 for version 1.8.0_172-b10
@@ -14,8 +14,7 @@ cask "oracle-jdk8" do
   #
   # Mirror URL, thanks to https://gist.github.com/wavezhang/ba8425f24a968ec9b2a8619d7c2d86a6
   #   giving mirror-links page https://helpx.adobe.com/coldfusion/kb/coldfusion-downloads.html#downloads3
-  url "https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java8/java#{java_release}/jdk/jdk-#{java_release}-macosx-#{arch}.dmg",
-      verified: "cfdownload.adobe.com/"
+  url "https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java8/java#{java_release}/jdk/jdk-#{java_release}-macosx-#{arch}.dmg"
   name "Oracle JDK SE 8"
   desc "Oracle Java Standard Edition Development Kit (JDK SE & Web Plug-in) version 8"
   # homepage "https://www.oracle.com/technetwork/java/javase/overview/index.html"
@@ -27,6 +26,8 @@ cask "oracle-jdk8" do
     strategy :page_match
     regex(/(1.8.*)/i)
   end
+
+  depends_on :macos
 
   # pkg "JDK " + java_release.sub("u"," Update ") + ".pkg" # e.g. "JDK 8 Update 172.pkg"
   pkg "JDK #{version.minor} Update #{java_update}.pkg"
